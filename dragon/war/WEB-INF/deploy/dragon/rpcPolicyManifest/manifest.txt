@@ -1,0 +1,3 @@
+# Module dragon
+# RPC service class, partial path of RPC policy file
+dragon.client.GreetingService, E04D86FC05A1F25068A6A5AEF36DCF7C.gwt.rpc
