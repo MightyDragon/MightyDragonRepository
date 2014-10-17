@@ -1,3 +1,5 @@
+package dragon.server;
+
 
 public class InitParser {
 
