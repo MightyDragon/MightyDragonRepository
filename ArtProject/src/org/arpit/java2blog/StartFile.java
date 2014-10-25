@@ -19,10 +19,8 @@ public class StartFile {
 		ArrayList<Class> classList = objects.getClasses();
 		
 		ArrayList<Object[]> methodList = getMethodNames(classList);
-		
-		JSONObject p = new JSONObject();
-		p.put(createJSONMethods(methodList), createJSONLinks());
-		System.out.println(p);
+		createJSONMethods(methodList);
+		createJSONLinks();
 		//Client pokemon = new Client();
 	}
 	
