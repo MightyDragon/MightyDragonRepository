@@ -1,8 +1,9 @@
 package org.arpit.java2blog;
 
 import org.json.simple.JSONArray;
-
 import org.json.simple.JSONObject;
+
+import src.simulator.Client;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -13,12 +14,13 @@ public class StartFile {
 
 	public static void main(String args[]){
 		System.out.println("And thus, we begin... ");
-
-		DummyObjects objects = new DummyObjects();
+		System.out.println(Thread.getAllStackTraces());
+		PokemonDummyObjects objects = new PokemonDummyObjects();
 		ArrayList<Class> classList = objects.getClasses();
 		
 		ArrayList<Object[]> methodList = getMethodNames(classList);
 		createJSONMethods(methodList);
+		//Client pokemon = new Client();
 	}
 	
 	public static void createJSONMethods(ArrayList<Object[]> classList){
