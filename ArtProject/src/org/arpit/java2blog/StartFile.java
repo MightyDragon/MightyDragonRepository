@@ -15,15 +15,18 @@ public class StartFile {
 	public static void main(String args[]){
 		System.out.println("And thus, we begin... ");
 		System.out.println(Thread.getAllStackTraces());
-		PokemonDummyObjects objects = new PokemonDummyObjects();
+		PokemonClassCollector objects = new PokemonClassCollector();
 		ArrayList<Class> classList = objects.getClasses();
 		
 		ArrayList<Object[]> methodList = getMethodNames(classList);
-		createJSONMethods(methodList);
+		
+		JSONObject p = new JSONObject();
+		p.put(createJSONMethods(methodList), createJSONLinks());
+		System.out.println(p);
 		//Client pokemon = new Client();
 	}
 	
-	public static void createJSONMethods(ArrayList<Object[]> classList){
+	public static JSONObject createJSONMethods(ArrayList<Object[]> classList){
 		JSONObject allMethods = new JSONObject();
 		JSONArray listMethods = new JSONArray();
 		
@@ -38,6 +41,7 @@ public class StartFile {
 		}
 		allMethods.put("nodes", listMethods);
 		System.out.println(allMethods);
+		return allMethods;
 	}
 	
 	public static ArrayList<Object[]> getMethodNames(ArrayList<Class> classes){
@@ -52,5 +56,24 @@ public class StartFile {
 		return pairs;
 	}
 	
-	
+	public static JSONObject createJSONLinks(){
+		JSONObject allLinks = new JSONObject();
+		JSONArray listLinks = new JSONArray();
+		
+		for (int i=0;i<10;i++){
+			
+			JSONObject link = new JSONObject();
+			link.put("source", i);
+			if(i<10){
+				link.put("target", i+1);
+			}else{
+				link.put("target", 0);
+			}
+			link.put("value", 1);
+			listLinks.add(link);
+		}
+		allLinks.put("links", listLinks);
+		System.out.println(allLinks);
+		return allLinks;
+	}
 }

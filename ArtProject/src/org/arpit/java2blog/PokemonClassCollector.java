@@ -16,11 +16,12 @@ import DummyClasses.Cat;
 import DummyClasses.Dog;
 import DummyClasses.Elephant;
 
-public class PokemonDummyObjects {
+public class PokemonClassCollector {
 
+	// Class used to manually create Araylist of all classes in Pokemon
 ArrayList<Class> classes = new ArrayList<Class>();
 	
-	public PokemonDummyObjects(){
+	public PokemonClassCollector(){
 		this.makeClasses();
 	
 	}
