@@ -50,7 +50,7 @@ public class StartFile {
 		}
 		allMethods.put("nodes", listMethods);
 		
-		//System.out.println(allMethods);
+		System.out.println(allMethods);
 		return allMethods;
 	}
 	
@@ -86,7 +86,7 @@ public class StartFile {
 			listLinks.add(link);
 		}
 		allLinks.put("links", listLinks);
-		//System.out.println(allLinks);
+		System.out.println(allLinks);
 		return allLinks;
 	}
 }
