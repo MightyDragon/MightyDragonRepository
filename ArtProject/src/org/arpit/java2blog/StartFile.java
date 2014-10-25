@@ -7,6 +7,9 @@ import src.simulator.Client;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.io.StringWriter; 
+import java.io.PrintWriter;
+
 
 
 
@@ -21,7 +24,15 @@ public class StartFile {
 		ArrayList<Object[]> methodList = getMethodNames(classList);
 		createJSONMethods(methodList);
 		createJSONLinks();
-		//Client pokemon = new Client();
+
+//		//Two lines of code to get the exception into a StringWriter
+//		StringWriter sw = new StringWriter();
+//		new Throwable().printStackTrace(new PrintWriter(sw));
+//
+//		//And to actually print it
+//		System.out.println("Current stack trace is:\n\t" + sw.toString());
+		
+		Client pokemon = new Client();
 	}
 	
 	public static JSONObject createJSONMethods(ArrayList<Object[]> classList){
@@ -38,7 +49,8 @@ public class StartFile {
 			listMethods.add(meth);
 		}
 		allMethods.put("nodes", listMethods);
-		System.out.println(allMethods);
+		
+		//System.out.println(allMethods);
 		return allMethods;
 	}
 	
@@ -51,6 +63,9 @@ public class StartFile {
 				pairs.add(p);
 			}
 		}
+		StringWriter sw = new StringWriter();
+		new Throwable().printStackTrace(new PrintWriter(sw));
+		System.out.println("Current stack trace is:\n\t" + sw.toString());
 		return pairs;
 	}
 	
@@ -71,7 +86,7 @@ public class StartFile {
 			listLinks.add(link);
 		}
 		allLinks.put("links", listLinks);
-		System.out.println(allLinks);
+		//System.out.println(allLinks);
 		return allLinks;
 	}
 }

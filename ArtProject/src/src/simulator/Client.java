@@ -23,13 +23,13 @@ import src.model.Species;
 public class Client {
 
 	public Client(){
-		//this.mainPokemon();
+		this.mainPokemon();
 	}
 	public static void mainPokemon() {
 		
 		List<Pkmn> battleList = new ArrayList<Pkmn>();
 		List<Pkmn> battleList2 = new ArrayList<Pkmn>();
-		
+		System.out.println(Thread.getAllStackTraces());
 
 		
 		Pkmn abra1 = new Pkmn(Species.ABRA, 5, Nature.TIMID);
