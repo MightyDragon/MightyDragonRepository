@@ -23,7 +23,7 @@ import src.model.Species;
 public class Client {
 
 	public Client(){
-		this.mainPokemon();
+		//this.mainPokemon();
 	}
 	public static void mainPokemon() {
 		

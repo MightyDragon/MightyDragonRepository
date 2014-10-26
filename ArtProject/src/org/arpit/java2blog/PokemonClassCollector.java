@@ -1,5 +1,7 @@
 package org.arpit.java2blog;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.ArrayList;
 
 import src.model.Ability;
@@ -23,6 +25,9 @@ ArrayList<Class> classes = new ArrayList<Class>();
 	
 	public PokemonClassCollector(){
 		this.makeClasses();
+		StringWriter sw = new StringWriter();
+		new Throwable().printStackTrace(new PrintWriter(sw));
+		System.out.println("Current stack trace is:\n\t" + sw.toString());
 	
 	}
 	

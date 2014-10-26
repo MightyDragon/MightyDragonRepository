@@ -1,5 +1,8 @@
 package src.model;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
 public class Status {
 	
 	public static Status BURN = new Status("Burn", "BRN");
@@ -17,6 +20,7 @@ public class Status {
 	public Status(String name, String code) {
 		this.name = name;
 		this.code = code;
+		
 	}
 	
 }

@@ -2,11 +2,16 @@ package org.arpit.java2blog;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.reflections.Reflections;
 
+import static org.reflections.ReflectionUtils.*;
 import src.simulator.Client;
 
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Member;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Set;
 import java.io.StringWriter; 
 import java.io.PrintWriter;
 
@@ -17,7 +22,7 @@ public class StartFile {
 
 	public static void main(String args[]){
 		System.out.println("And thus, we begin... ");
-		System.out.println(Thread.getAllStackTraces());
+		
 		PokemonClassCollector objects = new PokemonClassCollector();
 		ArrayList<Class> classList = objects.getClasses();
 		
@@ -50,7 +55,7 @@ public class StartFile {
 		}
 		allMethods.put("nodes", listMethods);
 		
-		System.out.println(allMethods);
+		//System.out.println(allMethods);
 		return allMethods;
 	}
 	
@@ -61,6 +66,7 @@ public class StartFile {
 			for (Method m : cMethods){
 				Object[] p = {m, c};
 				pairs.add(p);
+
 			}
 		}
 		StringWriter sw = new StringWriter();
@@ -77,7 +83,7 @@ public class StartFile {
 			
 			JSONObject link = new JSONObject();
 			link.put("source", i);
-			if(i<10){
+			if(i<9){
 				link.put("target", i+1);
 			}else{
 				link.put("target", 0);
