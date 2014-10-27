@@ -13,6 +13,7 @@ public class Dog{
 	   }
 	   
 	   void sleeping(){
+		   this.hungry();
 	   }
 	   
 	   void beingCute(){
