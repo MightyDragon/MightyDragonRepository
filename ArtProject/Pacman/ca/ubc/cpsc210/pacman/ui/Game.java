@@ -87,7 +87,7 @@ public class Game extends JFrame {
 	/**
 	 * Starts the main application
 	 */
-	public static void main(String args[]) {
+	public void pacmanMain() {
 		new Game();
 	}
 	

@@ -14,9 +14,6 @@ import src.model.Type;
 import src.model.Weather;
 import src.simulator.Client;
 import src.simulator.GenVSim;
-import DummyClasses.Cat;
-import DummyClasses.Dog;
-import DummyClasses.Elephant;
 
 public class PokemonClassCollector {
 
@@ -32,26 +29,16 @@ ArrayList<Class> classes = new ArrayList<Class>();
 	}
 	
 	public void makeClasses(){
-		Ability a = new Ability("asdf");
-		classes.add(a.getClass());
-		Nature n = new Nature("a", "b", "c");
-		classes.add(n.getClass());
-		Status s = new Status("n", "c");
-		classes.add(s.getClass());
-		Type t = new Type("t", true);
-		classes.add(t.getClass());
-		Move m = new Move("m", t, 0, 0);
-		classes.add(m.getClass());
-		Species sp = new Species("a", t, t);
-		classes.add(sp.getClass());
-		Pkmn p = new Pkmn(sp, 1, n);
-		classes.add(p.getClass());
-		Weather w = new Weather("a");
-		classes.add(w.getClass());
-		GenVSim g = new GenVSim(p, p, 0);
-		classes.add(g.getClass());
-		Client cl = new Client();
-		classes.add(cl.getClass());
+		classes.add(Ability.class);
+		classes.add(Nature.class);
+		classes.add(Status.class);
+		classes.add(Type.class);
+		classes.add(Move.class);
+		classes.add(Species.class);
+		classes.add(Pkmn.class);
+		classes.add(Weather.class);
+		classes.add(GenVSim.class);
+		classes.add(Client.class);
 		
 	}
 	
