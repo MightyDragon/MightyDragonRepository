@@ -1,4 +1,4 @@
-package org.arpit.java2blog;
+package fuser;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -15,17 +15,20 @@ import src.model.Weather;
 import src.simulator.Client;
 import src.simulator.GenVSim;
 
+
+/*
+ * Created this class to make list of classes in Pokemon package
+ */
+
 public class PokemonClassCollector {
 
 	// Class used to manually create Araylist of all classes in Pokemon
+	
 ArrayList<Class> classes = new ArrayList<Class>();
 	
 	public PokemonClassCollector(){
 		this.makeClasses();
-		StringWriter sw = new StringWriter();
-		new Throwable().printStackTrace(new PrintWriter(sw));
-		System.out.println("Current stack trace is:\n\t" + sw.toString());
-	
+		
 	}
 	
 	public void makeClasses(){

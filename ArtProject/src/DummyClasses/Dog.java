@@ -5,18 +5,21 @@ public class Dog{
 	   int age;
 	   String color;
 
-	   void barking(){
+	   public void barking(){
+		   Cat c = new Cat();
+		   c.beingAnnoying();
+		   
 	   }
 	   
-	   void hungry(){
+	   public void hungry(){
 		   this.barking();
 	   }
 	   
-	   void sleeping(){
+	   public void sleeping(){
 		   this.hungry();
 	   }
 	   
-	   void beingCute(){
+	   public void beingCute(){
 		   this.sleeping();
 	   }
 	}

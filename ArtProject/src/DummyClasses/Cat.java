@@ -5,22 +5,22 @@ public class Cat{
 	   int age;
 	   String color;
 
-	   void meowing(){
+	   public void meowing(){
 	   }
 	   
-	   void hungry(){
+	   public void hungry(){
 		   this.scratching();
 	   }
 	   
-	   void sleeping(){
+	   public void sleeping(){
 	   }
 	   
-	   void scratching(){
-		   Dog d = new Dog();
-		   d.barking();
+	   public void scratching(){
+		   Elephant d = new Elephant();
+		   d.entertainingGuests();
 	   }
 	   
-	   void beingAnnoying(){
+	   public void beingAnnoying(){
 		   this.meowing();
 		   this.scratching();
 	   }

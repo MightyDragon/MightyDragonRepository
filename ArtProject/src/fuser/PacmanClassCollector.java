@@ -1,4 +1,4 @@
-package org.arpit.java2blog;
+package fuser;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -15,6 +15,9 @@ import ca.ubc.cpsc210.pacman.ui.BoardPanel;
 import ca.ubc.cpsc210.pacman.ui.Game;
 import ca.ubc.cpsc210.pacman.ui.GridLocationPanel;
 
+/*
+ * Created this class to make list of classes in Pacman package
+ */
 
 public class PacmanClassCollector {
 
@@ -22,9 +25,6 @@ public class PacmanClassCollector {
 	
 	public PacmanClassCollector(){
 		this.makeClasses();
-		StringWriter sw = new StringWriter();
-		new Throwable().printStackTrace(new PrintWriter(sw));
-		System.out.println("Current stack trace is:\n\t" + sw.toString());
 	
 	}
 	

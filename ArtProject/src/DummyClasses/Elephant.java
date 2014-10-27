@@ -5,16 +5,17 @@ public class Elephant{
 	   int age;
 	   String color;
 
-	   void sprayingWater(){
+	   public void sprayingWater(){
+		   hungry();
 	   }
 	   
-	   void hungry(){
+	   public void hungry(){
 	   }
 	   
-	   void sleeping(){
+	   public void sleeping(){
 	   }
 	   
-	   void entertainingGuests(){
+	   public void entertainingGuests(){
 		   sprayingWater();
 		   entertainingGuests();
 	   }

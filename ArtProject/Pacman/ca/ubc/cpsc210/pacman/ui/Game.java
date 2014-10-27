@@ -3,6 +3,8 @@ package ca.ubc.cpsc210.pacman.ui;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 
 import javax.swing.AbstractAction;
 import javax.swing.JFrame;
@@ -10,6 +12,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.Timer;
+
 import ca.ubc.cpsc210.pacman.model.Board;
 import ca.ubc.cpsc210.pacman.model.Pacman;
 
@@ -33,9 +36,9 @@ public class Game extends JFrame {
 	// Requires: nothing
 	// Modifies: this
 	// Effects:  creates the Board for the game and sets up the GUI windows and buttons, the game timer, and begins the game
-	private void init() {
+	public void init() {
 		gameBoard = new Board();
-		
+
 		createMenus();
 		setupViewPanel();
 		
@@ -54,6 +57,8 @@ public class Game extends JFrame {
 	// Modifies: this
 	// Effects:  Sets up the game ticker.  If a ticker exists already it is turned off and discarded.
 	private void setupGameTicker() {
+		
+		
 		if (gameTicker != null) {
 			gameTicker.stop();
 		}
@@ -73,6 +78,7 @@ public class Game extends JFrame {
 	// Modifies: this 
 	// Effects:  creates the menubar and menu items (only one, for resetting the game)
 	private void createMenus() {
+		
 		JMenuBar menuBar = new JMenuBar();
 		JMenu drawingMenu = new JMenu("Pacman");
 		

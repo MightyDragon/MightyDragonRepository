@@ -1,4 +1,4 @@
-package org.arpit.java2blog;
+package fuser;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
