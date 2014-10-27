@@ -11,8 +11,9 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Member;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-
 import java.util.Set;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.StringWriter; 
 import java.io.PrintWriter;
 
@@ -72,9 +73,24 @@ public class StartFile {
 			// goes to methods that make JSON objects
 			
 			ArrayList<Object[]> methodList = getMethodNames(classList);
-			createJSONMethods(methodList);
-			createJSONLinks(methodPairs, methodList);
-
+//			createJSONMethods(methodList);
+//			createJSONLinks(methodPairs, methodList);
+			
+			JSONObject nodesAndLinks = new JSONObject();
+			nodesAndLinks.put("nodes", createJSONMethods(methodList));
+			nodesAndLinks.put("links", createJSONLinks(methodPairs, methodList));
+			System.out.println(nodesAndLinks);
+			
+			try {
+				 
+				FileWriter file = new FileWriter("war/miserables.json");
+				file.write(nodesAndLinks.toJSONString());
+				file.flush();
+				file.close();
+		 
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -111,22 +127,28 @@ public class StartFile {
 	 */
 	
 	// Uses Object[0] where [0] is Method and [1] is Class to create JSON object for Visualizer
-	public static JSONObject createJSONMethods(ArrayList<Object[]> classList){
+	public static JSONArray createJSONMethods(ArrayList<Object[]> classList){
 		JSONObject allMethods = new JSONObject();
 		JSONArray listMethods = new JSONArray();
-	
+		int groupNum = 0;
+		String curClass = "";
+		
 		for (Object[] m : classList){
 			JSONObject meth = new JSONObject();
 			Method methodz = (Method)m[0];
 			Class classz = (Class)m[1];
 			meth.put("name", methodz.getName());
-			meth.put("group", classz.getName());
+			meth.put("group", groupNum);
+			if (!curClass.equals(classz.getName())) {
+				groupNum++;
+				curClass = classz.getName();
+			}
 			listMethods.add(meth);
 		}
-		allMethods.put("nodes", listMethods);
+		//allMethods.put("nodes", listMethods);
+		//System.out.println(allMethods);
 		
-
-		return allMethods;
+		return listMethods;
 	}
 	
 
@@ -134,7 +156,7 @@ public class StartFile {
 	 *  Uses stackMethods is a pair of Methods that will be linked together (because of method calls), 
 	 *  and allMethods is the list of all our methods from all classes.
 	 */
-	public static JSONObject createJSONLinks(ArrayList<String[]> stackMethods, ArrayList<Object[]> allMethods){
+	public static JSONArray createJSONLinks(ArrayList<String[]> stackMethods, ArrayList<Object[]> allMethods){
 		JSONObject allLinks = new JSONObject();
 		JSONArray listLinks = new JSONArray();
 		
@@ -161,11 +183,11 @@ public class StartFile {
 				listLinks.add(link);
 			}
 		}
-		allLinks.put("links", listLinks);
+		//allLinks.put("links", listLinks);
 		
 		//Dynamically shows JSON objects as program is running of Links between methods (stack trace)
-		System.out.println(allLinks);
-		return allLinks;
+		//System.out.println(allLinks);
+		return listLinks;
 	}
 }
 
