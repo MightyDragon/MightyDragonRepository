@@ -21,12 +21,18 @@ var width = 960,
     
 var color = d3.scale.category20();
 
+var i = 1,
+    n = 100000;
+
+function aloop() {
+
+d3.select("body").selectAll("svg").remove();
+
 var svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height);
 
-var i = 1;
-while (i<100000) {
+
 d3.json("json/miserables" + i + ".json", function(error, graph) {
 
   graph.links.forEach(function(d) {
@@ -68,7 +74,10 @@ d3.json("json/miserables" + i + ".json", function(error, graph) {
           link.filter(function(l) { return l.target === d; }).attr("x2", d.x).attr("y2", d.y);
         }));
 });
-i++;
-}
 
+setTimeout(function() { i++; if (i < n) { aloop(); }}, 100);
+
+};
+
+aloop();
 </script>
