@@ -11,6 +11,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Member;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Set;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -133,12 +134,22 @@ public class StartFile {
 		int groupNum = 0;
 		String curClass = "";
 		
+		boolean highlightedAlready = true;
+		
 		for (Object[] m : classList){
 			JSONObject meth = new JSONObject();
 			Method methodz = (Method)m[0];
 			Class classz = (Class)m[1];
 			meth.put("name", methodz.getName());
 			meth.put("group", groupNum);
+			if (highlightedAlready) {
+				meth.put("highlight","t");
+				highlightedAlready = false;
+			} else {
+				meth.put("highlight","f");
+			}
+			meth.put("x", (new Random()).nextInt(400)+250);
+			meth.put("y", (new Random()).nextInt(200)+150);
 			if (!curClass.equals(classz.getName())) {
 				groupNum++;
 				curClass = classz.getName();
