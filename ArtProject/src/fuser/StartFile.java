@@ -57,6 +57,7 @@ public class StartFile {
 		 * We didnt use the code in this link in the program but we used it to learn what was going on:
 		 * Credit: http://stackoverflow.com/questions/1149703/how-can-i-convert-a-stack-trace-to-a-string
 		 */
+		int j = 1;
 		while (t.isAlive()) {
 			//System.out.println("Current stack trace:");
 			
@@ -84,7 +85,8 @@ public class StartFile {
 			
 			try {
 				 
-				FileWriter file = new FileWriter("war/miserables.json");
+				FileWriter file = new FileWriter("war/json/miserables"+ j +".json");
+				j++;
 				file.write(nodesAndLinks.toJSONString());
 				file.flush();
 				file.close();
