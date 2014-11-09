@@ -38,13 +38,20 @@ public class StartFile {
 //		Thread t = new Thread(pkmnClient);
 //		t.start();
 		
-		// To run Pokemon
-		PokemonClassCollector objects = new PokemonClassCollector();
+		// To run Library
+		LibraryClassCollector objects = new LibraryClassCollector();
 		ArrayList<Class> classList = objects.getClasses();
-		ClientRun pkmnClient = new ClientRun();
-		Thread t = new Thread(pkmnClient);
+		ClientRun libClient = new ClientRun();
+		Thread t = new Thread(libClient);
 		t.start();
 		
+		// To run Pokemon
+//		PokemonClassCollector objects = new PokemonClassCollector();
+//		ArrayList<Class> classList = objects.getClasses();
+//		ClientRun pkmnClient = new ClientRun();
+//		Thread t = new Thread(pkmnClient);
+//		t.start();
+//		
 		
 		// Demo for TAs to see our JSON objects for nodes. MUST COMMENT OUT LINE 74 AND 167. Its line 3 of the console
 //		ArrayList<Object[]> methodList = getMethodNames(classList);
