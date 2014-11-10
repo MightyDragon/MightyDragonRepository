@@ -51,7 +51,7 @@ public class StartFile {
 //		ClientRun pkmnClient = new ClientRun();
 //		Thread t = new Thread(pkmnClient);
 //		t.start();
-//		
+		
 		
 		// Demo for TAs to see our JSON objects for nodes. MUST COMMENT OUT LINE 74 AND 167. Its line 3 of the console
 //		ArrayList<Object[]> methodList = getMethodNames(classList);
