@@ -11,6 +11,8 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Member;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 import java.io.FileWriter;
@@ -39,18 +41,20 @@ public class StartFile {
 //		t.start();
 		
 		// To run Library
-		LibraryClassCollector objects = new LibraryClassCollector();
-		ArrayList<Class> classList = objects.getClasses();
-		ClientRun libClient = new ClientRun();
-		Thread t = new Thread(libClient);
-		t.start();
+//		LibraryClassCollector objects = new LibraryClassCollector();
+//		ArrayList<Class> classList = objects.getClasses();
+//		ArrayList<Object[]> methodList = getMethodNames(classList);
+//		ClientRun libClient = new ClientRun();
+//		Thread t = new Thread(libClient);
+//		t.start();
 		
 		// To run Pokemon
-//		PokemonClassCollector objects = new PokemonClassCollector();
-//		ArrayList<Class> classList = objects.getClasses();
-//		ClientRun pkmnClient = new ClientRun();
-//		Thread t = new Thread(pkmnClient);
-//		t.start();
+		PokemonClassCollector objects = new PokemonClassCollector();
+		ArrayList<Class> classList = objects.getClasses();
+		ArrayList<Object[]> methodList = getMethodNames(classList);
+		ClientRun pkmnClient = new ClientRun();
+		Thread t = new Thread(pkmnClient);
+		t.start();
 		
 		
 		// Demo for TAs to see our JSON objects for nodes. MUST COMMENT OUT LINE 74 AND 167. Its line 3 of the console
@@ -81,7 +85,7 @@ public class StartFile {
 			
 			// goes to methods that make JSON objects
 			
-			ArrayList<Object[]> methodList = getMethodNames(classList);
+//			ArrayList<Object[]> methodList = getMethodNames(classList);
 //			createJSONMethods(methodList);
 //			createJSONLinks(methodPairs, methodList);
 			
@@ -112,7 +116,9 @@ public class StartFile {
 		for (Class c : classes){
 			Method[] cMethods = c.getDeclaredMethods();
 			for (Method m : cMethods){
-				Object[] p = {m, c,currentNumber};
+				int x = (new Random()).nextInt(400)+250;
+				int y = (new Random()).nextInt(200)+150;
+				Object[] p = {m, c,currentNumber, x, y};
 				pairs.add(p);
 				currentNumber++;
 			}
@@ -145,6 +151,22 @@ public class StartFile {
 		
 		boolean highlightedAlready = true;
 		
+//		Map<JSONObject, ArrayList<Object>> map = new HashMap<JSONObject, ArrayList<Object>>();
+//		ArrayList<Object> values = new ArrayList<Object>();
+//		
+//		values.add((new Random()).nextInt(400)+250);
+//		values.add((new Random()).nextInt(200)+150);
+//		map.put(allMethods, values);
+		
+//		for (Object[] m : classList){
+//			int x = (new Random()).nextInt(400)+250;
+//			int y = (new Random()).nextInt(200)+150;
+//			m[2] = x;
+//			m[3] = y;
+//		}
+		
+		
+		
 		for (Object[] m : classList){
 			JSONObject meth = new JSONObject();
 			Method methodz = (Method)m[0];
@@ -157,8 +179,8 @@ public class StartFile {
 			} else {
 				meth.put("highlight","f");
 			}
-			meth.put("x", (new Random()).nextInt(400)+250);
-			meth.put("y", (new Random()).nextInt(200)+150);
+			meth.put("x", (int)m[3]);
+			meth.put("y", (int)m[4]);
 			if (!curClass.equals(classz.getName())) {
 				groupNum++;
 				curClass = classz.getName();

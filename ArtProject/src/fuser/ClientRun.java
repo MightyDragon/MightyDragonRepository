@@ -21,15 +21,15 @@ public class ClientRun implements Runnable {
 //		t.beginAllTests();
 		
 		//For running Pokemon
-//		Client pokemonClient = new Client();
-//		pokemonClient.mainPokemon();
+		Client pokemonClient = new Client();
+		pokemonClient.mainPokemon();
 		
 		//For running Pacman
 //		Game pacmanGame = new Game();
 		
 		//For running Library
-		MainLibrary libMain = new MainLibrary();
-		libMain.mainLib();
+//		MainLibrary libMain = new MainLibrary();
+//		libMain.mainLib();
 	}
 	
 }
