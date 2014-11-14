@@ -58,13 +58,6 @@ public class StartFile {
 //		Thread t = new Thread(pkmnClient);
 //		t.start();
 		
-		// To run Pacman
-//		PacmanClassCollector objects = new PacmanClassCollector();
-//		ArrayList<Class> classList = objects.getClasses();
-//		ClientRun pkmnClient = new ClientRun();
-//		Thread t = new Thread(pkmnClient);
-//		t.start();
-		
 		// To run Library
 		LibraryClassCollector objects = new LibraryClassCollector();
 		ArrayList<Class> classList = objects.getClasses();
@@ -151,13 +144,21 @@ public class StartFile {
 		return pairs;
 	}
 	
+	public static ArrayList<Method> getMethodArray(ArrayList<Object[]> methodClasses){
+		ArrayList<Method> methodList = new ArrayList<Method>();
+		for (Object[] o : methodClasses){
+			Method m = (Method)o[0];
+			methodList.add(m);
+		}
+		return methodList;
+	}
 	
 	/*
 	 *  Gets all pairs of methods that are linked through a method call. 
 	 *  Have not implemented yet however we will use this as a resource:
 	 *  Credit: I asked this question on stack overflow http://stackoverflow.com/questions/26554990/how-to-get-all-possible-callers-of-a-method-in-java-like-call-heirarchy
 	 */
-	public static ArrayList<String[]> getLinkPairs(){
+	public static ArrayList<String[]> getLinkPairs(ArrayList<Method> methods){
 		return null;
 	}
 	

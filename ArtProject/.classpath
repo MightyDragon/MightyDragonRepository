@@ -7,6 +7,6 @@
 	<classpathentry kind="lib" path="jars/reflections-0.9.9-RC1-uberjar.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="/Users/maripazpazgonzalez/Documents/MightyDragon/ojdbc6.jar"/>
+	<classpathentry kind="lib" path="jars/ojdbc6.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
