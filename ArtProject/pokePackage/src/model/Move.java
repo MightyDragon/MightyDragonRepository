@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Move {
+	
+	public static int counter = 0;
 
 	public static Move STRUGGLE = new Move("Struggle", Type.TYPELESS, 0, 1);
 	static {
@@ -1528,6 +1530,8 @@ public class Move {
 		statUpsFoe = new ArrayList<String>();
 		statDownsFoe = new ArrayList<String>();
 		critical = false;
+		
+		counter++;
 	}
 
 	//	public Move(String name, Type t, int pp) {
@@ -2667,6 +2671,10 @@ public class Move {
 
 	public int getFlinchAccuracy() {
 		return flinchAccuracy;
+	}
+	
+	public static int getCounter() {
+	    return counter;
 	}
 
 }

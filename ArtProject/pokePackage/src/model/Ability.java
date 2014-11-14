@@ -3,6 +3,8 @@ package src.model;
 
 public class Ability {
 	
+	public static int counter = 0;
+	
 	public static Ability ADAPTABILITY = new Ability("Adaptability"); // done
 	
 	public static Ability ANALYTIC = new Ability("Analytic");
@@ -228,10 +230,16 @@ public class Ability {
 	
 	public Ability(String name) {
 		this.name = name;
+		
+		counter++;
 	}
 	
 	public String getName() {
 		return name;
+	}
+	
+	public static int getCounter() {
+	    return counter;
 	}
 
 }

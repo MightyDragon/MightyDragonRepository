@@ -20,6 +20,8 @@ import ui.NotificationDialog;
 import main.MainLibrary;
 
 public class ReturnDialog extends JDialog{
+	
+	public static int counter = 0;
 
 	/**
 	 * 
@@ -35,11 +37,11 @@ public class ReturnDialog extends JDialog{
 		this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 		this.setTitle("Returns");
 		this.setSize(300, 200);
-		initComponents();
-		
+		initComponents7();
+		counter++;
 	}
 	
-	private void initComponents(){
+	private void initComponents7(){
 		
 		this.setLayout(new GridLayout(0,1));
 		
@@ -79,5 +81,9 @@ public class ReturnDialog extends JDialog{
 			
 		});
 		this.add(button);
+	}
+	
+	public static int getCounter() {
+	    return counter;
 	}
 }

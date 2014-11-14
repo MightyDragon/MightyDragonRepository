@@ -5,6 +5,8 @@ import java.util.List;
 
 public class Type {
 	
+	public static int counter = 0;
+	
 	static Type NORMAL = new Type("Normal", false);
 	static Type FIGHTING = new Type("Fighting", false);
 	static Type FLYING = new Type("Flying", false);
@@ -307,6 +309,8 @@ public class Type {
 		defendImmune = new ArrayList<Type>();
 		statusImmunities = new ArrayList<Status>();
 		weatherImmunities = new ArrayList<Weather>();
+		
+		counter++;
 	}
 	
 	public String getName() {
@@ -377,4 +381,8 @@ public class Type {
 		defendImmune.add(t);
 	}
 
+	public static int getCounter() {
+	    return counter;
+	}
+	
 }

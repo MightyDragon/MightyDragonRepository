@@ -18,6 +18,8 @@ import main.MainLibrary;
 
 public class PlaceHoldDialog extends JDialog{
 
+	public static int counter  = 0;
+	
 	/**
 	 * 
 	 */
@@ -32,11 +34,12 @@ public class PlaceHoldDialog extends JDialog{
 		this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 		this.setTitle("Place Hold");
 		this.setSize(300, 125);
-		initComponents();
+		initComponents2();
+		counter++;
 		
 	}
 	
-	private void initComponents(){
+	private void initComponents2(){
 		
 		this.setLayout(new FlowLayout(FlowLayout.LEADING));
 		
@@ -85,5 +88,9 @@ public class PlaceHoldDialog extends JDialog{
 			}
 			
 		});
+	}
+	
+	public static int getCounter() {
+	    return counter;
 	}
 }

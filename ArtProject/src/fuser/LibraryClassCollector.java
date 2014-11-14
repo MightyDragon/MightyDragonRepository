@@ -4,11 +4,10 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
 
-import com.sun.j3d.utils.applet.MainFrame;
-
 import main.DatabaseHandler;
 import main.MainLibrary;
 import main.OracleConnection;
+import ui.MainFrame;
 import ui.NotificationDialog;
 import ui.TopMenuBar;
 import ui.borrower.AccountInfoDialog;

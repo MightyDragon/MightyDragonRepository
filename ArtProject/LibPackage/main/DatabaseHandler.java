@@ -6,14 +6,19 @@ import java.util.*;
 import ui.NotificationDialog;
 
 public class DatabaseHandler {
+	
+	public static int counter = 0;
+	
 	private static OracleConnection con;
 	public static final int BORROWER_SEARCH = 0;
 	public static final int OVERDUE_SEARCH = 1;
 	public static final int CHECKED_OUT_REPORT = 2;
 	public static final int MOST_POPULAR_REPORT = 3;
+	
 	public DatabaseHandler(){
 
 		con = new OracleConnection();
+		counter++;
 	}
 	public void addBook(int callNumber, int isbn, String title, String mainAuthor, String publisher, int year, int copy, Vector<String> subVector, Vector<String> authorVector){
 		PreparedStatement ps;
@@ -776,6 +781,10 @@ public class DatabaseHandler {
 			e.printStackTrace();
 		}
 		return books;
+	}
+	
+	public static int getCounter() {
+	    return counter;
 	}
 }
 

@@ -15,6 +15,9 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 
 public class NotificationDialog extends JDialog{
+	
+	public static int counter = 0;
+	
 	public NotificationDialog(Frame f,String title, String msg){
 		super(f, true);
 		//final JFrame mainFrame = new JFrame("Error!");
@@ -59,5 +62,11 @@ public class NotificationDialog extends JDialog{
 		// make the window visible
 		this.setVisible(true);
 		this.setAlwaysOnTop(true);
+		
+		counter++;
+	}
+	
+	public static int getCounter() {
+	    return counter;
 	}
 }

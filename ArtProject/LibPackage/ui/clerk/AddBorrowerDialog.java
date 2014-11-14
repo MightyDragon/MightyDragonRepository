@@ -24,6 +24,8 @@ import ui.NotificationDialog;
 import main.MainLibrary;
 
 public class AddBorrowerDialog extends JDialog{
+	
+	public static int counter = 0;
 	/**
 	 * 
 	 */
@@ -45,11 +47,12 @@ public class AddBorrowerDialog extends JDialog{
 		this.setSize(new Dimension(250,400));
 		this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 		this.setTitle("Add Borrower");
-		initComponents();
+		initComponents4();
+		counter++;
 
 	}
 
-	private void initComponents(){
+	private void initComponents4(){
 		//Panel - BID
 
 		//Panel - password
@@ -197,6 +200,10 @@ public class AddBorrowerDialog extends JDialog{
 		});
 
 
+	}
+	
+	public static int getCounter() {
+	    return counter;
 	}
 
 }

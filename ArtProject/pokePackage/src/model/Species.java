@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Species {
 	
-	
+	public static int counter = 0;
 	
 	public static Species ABRA = new Species("Abra", Type.PSYCHIC);
 	static {
@@ -1413,6 +1413,7 @@ public class Species {
 		type2 = t2;
 		setStats(1, 0, 1, 0, 0, 1);
 		abilities = new ArrayList<Ability>(3);
+		counter++;
 	}
 	
 	public Species(String name, Type t1) {
@@ -1420,6 +1421,7 @@ public class Species {
 		type1 = t1;
 		setStats(1, 0, 1, 0, 0, 1);
 		abilities = new ArrayList<Ability>(3);
+		counter++;
 	}
 
 	private void setStats(int hp, int att, int def, int spd, int spAtt, int spDef) {
@@ -1485,6 +1487,10 @@ public class Species {
 	
 	public int getSpDefence() {
 		return baseSpDefence;
+	}
+	
+	public static int getCounter() {
+	    return counter;
 	}
 
 }

@@ -2,6 +2,8 @@ package src.model;
 
 public class Pkmn {
 	
+	public static int counter = 0;
+	
 	Species species;
 	
 	// For lindo-friendly output
@@ -142,6 +144,7 @@ public class Pkmn {
 		if (!s.abilities.isEmpty()) {
 			ability = s.abilities.get(0);
 		}
+		counter++;
 	}
 	
 	/**
@@ -776,6 +779,10 @@ public class Pkmn {
 			System.out.println("Move 4: --");
 			System.out.println();
 		}
+	}
+	
+	public static int getCounter() {
+	    return counter;
 	}
 
 }

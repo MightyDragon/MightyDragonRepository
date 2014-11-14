@@ -32,6 +32,7 @@ import main.MainLibrary;
 
 public class AddBookDialog extends JDialog{
 
+	public static int counter = 0;
 	/**
 	 * Default Generated serial ID
 	 */
@@ -52,10 +53,11 @@ public class AddBookDialog extends JDialog{
 		Dimension d = this.getToolkit().getScreenSize();
 		Rectangle r = this.getBounds();
 		this.setLocation( (d.width - r.width)/4, (d.height - r.height)/4 );
-		initComponents();
+		initComponents8();
+		counter++;
 	}
 
-	private void initComponents(){
+	private void initComponents8(){
 		JPanel column0 = new JPanel();
 		column0.setLayout(new GridLayout(0,1));
 
@@ -377,5 +379,9 @@ public class AddBookDialog extends JDialog{
 			}
 		});
 
+	}
+	
+	public static int getCounter() {
+	    return counter;
 	}
 }

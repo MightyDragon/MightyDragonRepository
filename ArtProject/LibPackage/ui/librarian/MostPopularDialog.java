@@ -25,6 +25,8 @@ import main.DatabaseHandler;
 import main.MainLibrary;
 
 public class MostPopularDialog extends JDialog{
+	
+	public static int counter = 0;
 
 	/**
 	 * Default Generated serial ID
@@ -42,10 +44,11 @@ public class MostPopularDialog extends JDialog{
 		this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 		
 		this.setSize(new Dimension(635, 400));
-		initComponents();
+		initComponents10();
+		counter++;
 	}
 	
-	private void initComponents(){
+	private void initComponents10(){
 		//Input Panel
 		
 		JPanel input = new JPanel();
@@ -123,5 +126,9 @@ public class MostPopularDialog extends JDialog{
 		});
 		
 		
+	}
+	
+	public static int getCounter() {
+	    return counter;
 	}
 }

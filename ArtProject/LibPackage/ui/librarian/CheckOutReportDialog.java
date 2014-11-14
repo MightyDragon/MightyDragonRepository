@@ -24,6 +24,8 @@ import main.MainLibrary;
 
 public class CheckOutReportDialog extends JDialog{
 
+	public static int counter = 0;
+	
 	/**
 	 * Default Generated serial ID
 	 */
@@ -38,10 +40,11 @@ public class CheckOutReportDialog extends JDialog{
 		this.setTitle("Report");
 		this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 
-		initComponents();
+		initComponents9();
+		counter++;
 	}
 
-	private void initComponents(){
+	private void initComponents9(){
 		JLabel label = new JLabel("Subject: ");
 		this.add(label);
 
@@ -96,6 +99,10 @@ public class CheckOutReportDialog extends JDialog{
 			books.addRow(books2.get(j));
 		}
 		return;
+	}
+	
+	public static int getCounter() {
+	    return counter;
 	}
 
 }

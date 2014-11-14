@@ -18,6 +18,8 @@ import main.MainLibrary;
 import ui.NotificationDialog;
 
 public class PayFineDialog extends JDialog{
+	
+	public static int counter = 0;
 
 	/**
 	 * 
@@ -32,13 +34,14 @@ public class PayFineDialog extends JDialog{
 		this.setTitle("Pay Fine");
 		this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 		
-		initComponents();
+		initComponents1();
 	
 		this.setSize(new Dimension(200,300));
 		pack();
+		counter++;
 	}
 	
-	private void initComponents(){
+	private void initComponents1(){
 		
 		JLabel bidLabel= new JLabel("BID: ");
 		this.add(bidLabel);
@@ -86,5 +89,9 @@ public class PayFineDialog extends JDialog{
 		});
 		this.add(payButton);
 		
+	}
+	
+	public static int getCounter() {
+	    return counter;
 	}
 }

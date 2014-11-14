@@ -2,6 +2,8 @@ package src.model;
 
 public class Nature {
 	
+	public static int counter = 0;
+	
 	public static Nature HARDY = new Nature("Hardy", "A", "A");
 	public static Nature LONELY = new Nature("Lonely", "A", "D");
 	public static Nature BRAVE = new Nature("Brave", "A", "SP");
@@ -82,6 +84,7 @@ public class Nature {
 				break;
 			}
 		}
+		counter++;
 	}
 
 	public String getInc() {
@@ -110,6 +113,10 @@ public class Nature {
 
 	public double getSpeedMod() {
 		return speedMod;
+	}
+	
+	public static int getCounter() {
+	    return counter;
 	}
 
 }

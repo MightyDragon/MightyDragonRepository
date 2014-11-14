@@ -5,6 +5,8 @@ import java.io.StringWriter;
 
 public class Status {
 	
+	public static int counter = 0;
+	
 	public static Status BURN = new Status("Burn", "BRN");
 	public static Status FREEZE = new Status("Freeze", "FRZ");
 	public static Status PARALYSIS = new Status("Paralysis", "PAR");
@@ -20,7 +22,11 @@ public class Status {
 	public Status(String name, String code) {
 		this.name = name;
 		this.code = code;
-		
+		counter++;
+	}
+	
+	public static int getCounter() {
+	    return counter;
 	}
 	
 }

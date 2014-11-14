@@ -2,6 +2,8 @@ package src.model;
 
 public class Weather {
 	
+	public static int counter = 0;
+	
 	static Weather SUNLIGHT = new Weather("Intense sunlight");
 	static Weather RAIN = new Weather("Rain");
 	static Weather SANDSTORM = new Weather("Sandstorm");
@@ -11,6 +13,11 @@ public class Weather {
 	
 	public Weather(String name) {
 		this.name = name;
+		counter++;
+	}
+	
+	public static int getCounter() {
+	    return counter;
 	}
 
 }

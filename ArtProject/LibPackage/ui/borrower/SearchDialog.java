@@ -26,6 +26,8 @@ import main.MainLibrary;
 
 public class SearchDialog extends JDialog{
 
+	public static int counter = 0;
+	
 	/**
 	 * Default Generated serial ID
 	 */
@@ -42,10 +44,11 @@ public class SearchDialog extends JDialog{
 		this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 
 		this.setSize(new Dimension(600, 300));
-		initComponents();
+		initComponents3();
+		counter++;
 	}
 
-	private void initComponents(){
+	private void initComponents3(){
 		JLabel label = new JLabel("Search: ");
 		this.add(label);
 
@@ -156,6 +159,10 @@ public class SearchDialog extends JDialog{
 
 
 
+	}
+	
+	public static int getCounter() {
+	    return counter;
 	}
 }
 

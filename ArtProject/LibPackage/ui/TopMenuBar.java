@@ -28,6 +28,9 @@ import ui.librarian.MostPopularDialog;
  * all the menu item configuration should be added here
  */
 public class TopMenuBar extends JMenuBar {
+	
+	public static int counter  = 0;
+	
 	/**
 	 * 
 	 */
@@ -42,7 +45,7 @@ public class TopMenuBar extends JMenuBar {
 		addBorrowerMenuItem();
 		addClerkMenuItem();
 		addLibrarianMenuItem();
-		
+		counter++;
 	}
 	private void addFileMenuItem(){
 		JMenu fileMenu = new JMenu("File");
@@ -265,6 +268,10 @@ public class TopMenuBar extends JMenuBar {
 		
 		this.add(lMenu);
 		
+	}
+	
+	public static int getCounter() {
+	    return counter;
 	}
 
 }

@@ -26,6 +26,8 @@ import ui.NotificationDialog;
 import main.MainLibrary;
 
 public class CheckOutDialog extends JDialog{
+	
+	public static int counter = 0;
 	/**
 	 * 
 	 */
@@ -39,11 +41,12 @@ public class CheckOutDialog extends JDialog{
 		this.setSize(new Dimension(400,300));
 		this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 		this.setTitle("Check out items");
-		initComponents();
+		initComponents5();
+		counter++;
 
 	}
 
-	private void initComponents(){
+	private void initComponents5(){
 		
 		final DefaultListModel books = new DefaultListModel();
 		final JList items = new JList(books);
@@ -138,6 +141,10 @@ public class CheckOutDialog extends JDialog{
 		this.add(checkOutPanel);
 		
 
+	}
+	
+	public static int getCounter() {
+	    return counter;
 	}
 
 }

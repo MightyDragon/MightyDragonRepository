@@ -2,7 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="pokePackage"/>
-	<classpathentry kind="src" path="Pacman"/>
 	<classpathentry kind="src" path="LibPackage"/>
 	<classpathentry kind="lib" path="jars/json-simple-1.1.1.jar"/>
 	<classpathentry kind="lib" path="jars/reflections-0.9.9-RC1-uberjar.jar"/>

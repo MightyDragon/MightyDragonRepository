@@ -7,6 +7,8 @@ import src.model.Status;
 
 public class GenVSim {
 	
+	public static int counter = 0;
+	
 	private Pkmn p1;
 	private Pkmn p2;
 	private int count = 0; // number of rounds
@@ -15,6 +17,7 @@ public class GenVSim {
 		this.p1 = p1;
 		this.p2 = p2;
 		count = i;
+		counter++;
 	}
 
 	// A single battle between the Pkmn stored in this
@@ -597,5 +600,9 @@ public class GenVSim {
 		// TODO Auto-generated method stub
 		
 		return (p1.getStatus().equals(Status.FAINT) || p2.getStatus().equals(Status.FAINT));
+	}
+	
+	public static int getCounter() {
+	    return counter;
 	}
 }

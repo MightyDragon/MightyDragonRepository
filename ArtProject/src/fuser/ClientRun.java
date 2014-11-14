@@ -1,7 +1,6 @@
 package fuser;
 
 import main.MainLibrary;
-import ca.ubc.cpsc210.pacman.ui.Game;
 import DummyClasses.AnimalTests;
 import DummyClasses.Dog;
 import src.simulator.Client;
@@ -21,15 +20,13 @@ public class ClientRun implements Runnable {
 //		t.beginAllTests();
 		
 		//For running Pokemon
-		Client pokemonClient = new Client();
-		pokemonClient.mainPokemon();
+//		Client pokemonClient = new Client();
+//		pokemonClient.mainPokemon();
 		
-		//For running Pacman
-//		Game pacmanGame = new Game();
 		
 		//For running Library
-//		MainLibrary libMain = new MainLibrary();
-//		libMain.mainLib();
+		MainLibrary libMain = new MainLibrary();
+		libMain.mainLib();
 	}
 	
 }

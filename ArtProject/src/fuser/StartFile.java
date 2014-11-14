@@ -1,11 +1,36 @@
 package fuser;
 
+import main.DatabaseHandler;
+import main.OracleConnection;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.reflections.Reflections;
 
 import static org.reflections.ReflectionUtils.*;
+import src.model.Ability;
+import src.model.Move;
+import src.model.Nature;
+import src.model.Pkmn;
+import src.model.Species;
+import src.model.Status;
+import src.model.Weather;
 import src.simulator.Client;
+import src.simulator.GenVSim;
+import ui.MainFrame;
+import ui.NotificationDialog;
+import ui.TopMenuBar;
+import ui.borrower.AccountInfoDialog;
+import ui.borrower.PayFineDialog;
+import ui.borrower.PlaceHoldDialog;
+import ui.borrower.SearchDialog;
+import ui.clerk.AddBorrowerDialog;
+import ui.clerk.CheckOutDialog;
+import ui.clerk.CheckOverdueDialog;
+import ui.clerk.ReturnDialog;
+import ui.librarian.AddBookDialog;
+import ui.librarian.CheckOutReportDialog;
+import ui.librarian.MostPopularDialog;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Member;
@@ -41,20 +66,20 @@ public class StartFile {
 //		t.start();
 		
 		// To run Library
-//		LibraryClassCollector objects = new LibraryClassCollector();
-//		ArrayList<Class> classList = objects.getClasses();
-//		ArrayList<Object[]> methodList = getMethodNames(classList);
-//		ClientRun libClient = new ClientRun();
-//		Thread t = new Thread(libClient);
-//		t.start();
-		
-		// To run Pokemon
-		PokemonClassCollector objects = new PokemonClassCollector();
+		LibraryClassCollector objects = new LibraryClassCollector();
 		ArrayList<Class> classList = objects.getClasses();
 		ArrayList<Object[]> methodList = getMethodNames(classList);
-		ClientRun pkmnClient = new ClientRun();
-		Thread t = new Thread(pkmnClient);
+		ClientRun libClient = new ClientRun();
+		Thread t = new Thread(libClient);
 		t.start();
+		
+		// To run Pokemon
+//		PokemonClassCollector objects = new PokemonClassCollector();
+//		ArrayList<Class> classList = objects.getClasses();
+//		ArrayList<Object[]> methodList = getMethodNames(classList);
+//		ClientRun pkmnClient = new ClientRun();
+//		Thread t = new Thread(pkmnClient);
+//		t.start();
 		
 		
 		// Demo for TAs to see our JSON objects for nodes. MUST COMMENT OUT LINE 74 AND 167. Its line 3 of the console
@@ -150,6 +175,36 @@ public class StartFile {
 		String curClass = "";
 		
 		boolean highlightedAlready = true;
+		
+		//objects instantiated in Pokemon 
+//		System.out.println("--------------------------fuck the police -----------------------");
+//		System.out.println("Number of Ability: " + Ability.getCounter());
+//		System.out.println("Number of Move: " + Move.getCounter());
+//		System.out.println("Number of Nature: " + Nature.getCounter());
+//		System.out.println("Number of Pkmn: " + Pkmn.getCounter());
+//		System.out.println("Number of Species: " + Species.getCounter());
+//		System.out.println("Number of Status: " + Status.getCounter());
+//		System.out.println("Number of Weather: " + Weather.getCounter());
+//		System.out.println("Number of GenVSim: " + GenVSim.getCounter());
+		
+		//objects instantiated in Library
+//		System.out.println("Number of DatabaseHandler: " + DatabaseHandler.getCounter());
+//		System.out.println("Number of OracleConnection: " + OracleConnection.getCounter());
+//		System.out.println("Number of MainFrame: " + MainFrame.getCounter());
+//		System.out.println("Number of NotificationDialog: " + NotificationDialog.getCounter());
+//		System.out.println("Number of TopMenuBar: " + TopMenuBar.getCounter());
+//		System.out.println("Number of AccountInfoDialog: " + AccountInfoDialog.getCounter());
+//		System.out.println("Number of PayFineDialog: " + PayFineDialog.getCounter());
+//		System.out.println("Number of PlaceHoldDialog: " + PlaceHoldDialog.getCounter());
+//		System.out.println("Number of SearchDialog: " + SearchDialog.getCounter());
+//		System.out.println("Number of AddBorrowerDialog: " + AddBorrowerDialog.getCounter());
+//		System.out.println("Number of CheckOutDialog: " + CheckOutDialog.getCounter());
+//		System.out.println("Number of CheckOverdueDialog: " + CheckOverdueDialog.getCounter());
+//		System.out.println("Number of ReturnDialog: " + ReturnDialog.getCounter());
+//		System.out.println("Number of AddBookDialog: " + AddBookDialog.getCounter());
+//		System.out.println("Number of CheckOutReportDialog: " + CheckOutReportDialog.getCounter());
+//		System.out.println("Number of MostPopularDialog: " + MostPopularDialog.getCounter());
+
 		
 //		Map<JSONObject, ArrayList<Object>> map = new HashMap<JSONObject, ArrayList<Object>>();
 //		ArrayList<Object> values = new ArrayList<Object>();

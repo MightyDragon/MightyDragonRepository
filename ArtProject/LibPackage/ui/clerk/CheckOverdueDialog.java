@@ -26,6 +26,8 @@ import main.DatabaseHandler;
 import main.MainLibrary;
 
 public class CheckOverdueDialog extends JDialog{
+	
+	public static int counter = 0;
 	/**
 	 * 
 	 */
@@ -37,11 +39,12 @@ public class CheckOverdueDialog extends JDialog{
 		this.setLayout(new FlowLayout());
 		this.setSize(new Dimension(600,300));
 		this.setTitle("Overdue Books");
-		initComponents();
+		initComponents6();
+		counter++;
 		
 	}
 	
-	private void initComponents(){
+	private void initComponents6(){
 		final JPanel listViewer = new JPanel();
 
 		final DefaultTableModel books = new DefaultTableModel();
@@ -99,6 +102,10 @@ public class CheckOverdueDialog extends JDialog{
 		});
 			
 		this.add(emailAll);
+	}
+	
+	public static int getCounter() {
+	    return counter;
 	}
 
 }

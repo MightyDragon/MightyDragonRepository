@@ -24,6 +24,9 @@ import ui.NotificationDialog;
 import main.MainLibrary;
 
 public class AccountInfoDialog extends JDialog{
+	
+	public static int counter = 0;
+	
 	/**
 	 * 
 	 */
@@ -38,6 +41,7 @@ public class AccountInfoDialog extends JDialog{
 		this.setTitle("Account Information");
 		this.setSize(new Dimension(600,500));
 		initComponents();
+		counter++;
 	}
 	
 	private void initComponents(){
@@ -184,5 +188,8 @@ public class AccountInfoDialog extends JDialog{
 
 	}
 	
+	public static int getCounter() {
+	    return counter;
+	}
 
 }

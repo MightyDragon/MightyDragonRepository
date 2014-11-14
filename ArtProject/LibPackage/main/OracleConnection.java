@@ -8,6 +8,9 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class OracleConnection implements ActionListener{
+	
+	public static int counter = 0;
+	
 	// command line reader 
 	private BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 
@@ -128,6 +131,7 @@ public class OracleConnection implements ActionListener{
 			System.out.println("Message: " + ex.getMessage());
 			System.exit(-1);
 		}
+		counter++;
 	}
 	
 	
@@ -176,6 +180,10 @@ public class OracleConnection implements ActionListener{
 			}
 		}             
 
+	}
+	
+	public static int getCounter() {
+	    return counter;
 	}
 
 }

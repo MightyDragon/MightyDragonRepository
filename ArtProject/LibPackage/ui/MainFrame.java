@@ -12,6 +12,8 @@ import javax.swing.*;
  * Class for the main window of the library program
  */
 public class MainFrame extends JFrame{
+	
+	public static int counter = 0;
 
 	/**
 	 * 
@@ -35,6 +37,12 @@ public class MainFrame extends JFrame{
 		
 		setJMenuBar(new TopMenuBar(this));
 		
+		counter++;
+		
+	}
+	
+	public static int getCounter() {
+	    return counter;
 	}
 	
 
