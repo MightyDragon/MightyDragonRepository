@@ -62,25 +62,24 @@ public class StartFile {
 //		t.start();
 		
 		// To run Library
-		LibraryClassCollector objects = new LibraryClassCollector();
+//		LibraryClassCollector objects = new LibraryClassCollector();
+//		ArrayList<Class> classList = objects.getClasses();
+//		ArrayList<Object[]> methodList = getMethodNames(classList);
+//		int methodNum = methodList.size();
+//		JSONArray allJSONlinks = createJSONLinksStatic(methodNum, methodList);
+//		ClientRun libClient = new ClientRun();
+//		Thread t = new Thread(libClient);
+//		t.start();
+		
+		// To run Pokemon
+		PokemonClassCollector objects = new PokemonClassCollector();
 		ArrayList<Class> classList = objects.getClasses();
 		ArrayList<Object[]> methodList = getMethodNames(classList);
 		int methodNum = methodList.size();
 		JSONArray allJSONlinks = createJSONLinksStatic(methodNum, methodList);
-		ClientRun libClient = new ClientRun();
-		Thread t = new Thread(libClient);
+		ClientRun pkmnClient = new ClientRun();
+		Thread t = new Thread(pkmnClient);
 		t.start();
-		
-		// To run Pokemon
-//		PokemonClassCollector objects = new PokemonClassCollector();
-//		ArrayList<Class> classList = objects.getClasses();
-//		ArrayList<Object[]> methodList = getMethodNames(classList);
-//		int methodNum = methodList.size();
-//		JSONArray allJSONlinks = createJSONRealLinks(methodNum, methodList);
-//		ArrayList<Object[]> methodList = getMethodNames(classList);
-//		ClientRun pkmnClient = new ClientRun();
-//		Thread t = new Thread(pkmnClient);
-//		t.start();
 		
 		
 		// Demo for TAs to see our JSON objects for nodes. MUST COMMENT OUT LINE 74 AND 167. Its line 3 of the console
@@ -309,16 +308,15 @@ public class StartFile {
 		JSONArray listLinks = new JSONArray();
 		
 		for (Object[] m : allMethods){
-			int links = rand(0,3);
-			
+			int links = rand(0, 1);
+			int methodNumber = (int)m[2];
 			for (int i=0; i<links; i++){
 				JSONObject link = new JSONObject();
-				link.put("source", m[2]);
-				link.put("target", rand(0,numMethods));
-				link.put("value", 1);
+				link.put("source", methodNumber);
+				link.put("target", rand(0,numMethods-1));
 				listLinks.add(link);
 			}
-			return listLinks;
+			
 		}
 	//allLinks.put("links", listLinks);
 	
