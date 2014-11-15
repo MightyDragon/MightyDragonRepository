@@ -67,6 +67,7 @@ public class StartFile {
 //		ArrayList<Object[]> methodList = getMethodNames(classList);
 //		int methodNum = methodList.size();
 //		JSONArray allJSONlinks = createJSONLinksStatic(methodNum, methodList);
+//		ArrayList<Object[]> objList = getLibObjectNumber();
 //		ClientRun libClient = new ClientRun();
 //		Thread t = new Thread(libClient);
 //		t.start();
@@ -77,6 +78,7 @@ public class StartFile {
 		ArrayList<Object[]> methodList = getMethodNames(classList);
 		int methodNum = methodList.size();
 		JSONArray allJSONlinks = createJSONLinksStatic(methodNum, methodList);
+		ArrayList<Object[]> objList = getPkmnObjectNumber();
 		ClientRun pkmnClient = new ClientRun();
 		Thread t = new Thread(pkmnClient);
 		t.start();
@@ -117,6 +119,7 @@ public class StartFile {
 			JSONObject nodesAndLinks = new JSONObject();
 			nodesAndLinks.put("nodes", createJSONMethods(methodList));
 			//nodesAndLinks.put("links", createJSONLinksStack(methodPairs, methodList));
+			nodesAndLinks.put("objects", createJSONObjects(objList));
 			nodesAndLinks.put("links", allJSONlinks);
 			System.out.println(nodesAndLinks);
 			
@@ -169,6 +172,94 @@ public class StartFile {
 	public static ArrayList<String[]> getLinkPairs(ArrayList<Method> methods){
 		return null;
 	}
+	
+	/* Gets an Object[] of class name and object count in that class for pokemon
+	 */
+	
+	public static ArrayList<Object[]> getPkmnObjectNumber(){
+		ArrayList<Object[]> pairs = new ArrayList<Object[]>();
+		Object[] p1 = {"Ability", Ability.getCounter()};
+		pairs.add(p1);
+		Object[] p2 = {"Move", Move.getCounter()};
+		pairs.add(p2);
+		Object[] p3 = {"Nature", Nature.getCounter()};
+		pairs.add(p3);
+		Object[] p4 = {"Pkmn", Pkmn.getCounter()};
+		pairs.add(p4);
+		Object[] p5 = {"Species", Species.getCounter()};
+		pairs.add(p5);
+		Object[] p6 = {"Status", Status.getCounter()};
+		pairs.add(p6);
+		Object[] p7 = {"Weather", Weather.getCounter()};
+		pairs.add(p7);
+		Object[] p8 = {"GenVSim",  GenVSim.getCounter()};
+		pairs.add(p8);
+		
+		return pairs;
+
+	}
+	
+	/* Gets an Object[] of class name and object count in that class for Library
+	 */
+	
+	public static ArrayList<Object[]> getLibObjectNumber(){
+		
+		ArrayList<Object[]> pairs = new ArrayList<Object[]>();
+		Object[] p1 = {"DatabaseHandler", DatabaseHandler.getCounter()};
+		pairs.add(p1);
+		Object[] p2 = {"OracleConnection", OracleConnection.getCounter()};
+		pairs.add(p2);
+		Object[] p3 = {"MainFrame", MainFrame.getCounter()};
+		pairs.add(p3);
+		Object[] p4 = {"NotificationDialog", NotificationDialog.getCounter()};
+		pairs.add(p4);
+		Object[] p5 = {"TopMenuBar", TopMenuBar.getCounter()};
+		pairs.add(p5);
+		Object[] p6 = {"AccountInfoDialog", AccountInfoDialog.getCounter()};
+		pairs.add(p6);
+		Object[] p7 = {"PayFineDialog", PayFineDialog.getCounter()};
+		pairs.add(p7);
+		Object[] p8 = {"PlaceHoldDialog", PlaceHoldDialog.getCounter()};
+		pairs.add(p8);
+		Object[] p9 = {"SearchDialog", SearchDialog.getCounter()};
+		pairs.add(p9);
+		Object[] p10 = {"AddBorrowerDialog", AddBorrowerDialog.getCounter()};
+		pairs.add(p10);
+		Object[] p11 = {"CheckOutDialog", CheckOutDialog.getCounter()};
+		pairs.add(p11);
+		Object[] p12 = {"CheckOverdueDialog", CheckOverdueDialog.getCounter()};
+		pairs.add(p12);
+		Object[] p13 = {"ReturnDialog", ReturnDialog.getCounter()};
+		pairs.add(p13);
+		Object[] p14 = {"AddBookDialog", AddBookDialog.getCounter()};
+		pairs.add(p14);
+		Object[] p15 = {"CheckOutReportDialog", CheckOutReportDialog.getCounter()};
+		pairs.add(p15);
+		Object[] p16 = {"MostPopularDialog", MostPopularDialog.getCounter()};
+		pairs.add(p16);
+		
+		return pairs;
+
+	}
+
+	// Creates JSON object to input int the visualizer
+		public static JSONArray createJSONObjects(ArrayList<Object[]> objectList){
+			JSONArray listObjects = new JSONArray();
+
+			int classNum = 0;
+			for (Object[] o : objectList) {
+				int classObjectNum = (int) o[1];
+				for (int i=0; i<classObjectNum; i++){
+					JSONObject obj = new JSONObject();
+					obj.put("x", (new Random()).nextInt(750)+100);
+					obj.put("y", (new Random()).nextInt(400)+50);
+					obj.put("group", classNum);
+					listObjects.add(obj);
+				}
+				classNum++;
+			}		
+			return listObjects;
+		}
 	
 	
 	/*
