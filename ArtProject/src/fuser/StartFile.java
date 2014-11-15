@@ -54,6 +54,9 @@ public class StartFile {
 		// To run initial Animal Testing :) 
 //		DummyObjects dummy = new DummyObjects();
 //		ArrayList<Class> classList = dummy.getClasses();
+//		ArrayList<Object[]> methodList = getMethodNames(classList);
+//		int methodNum = methodList.size();
+//		JSONArray allJSONlinks = createJSONRealLinks(methodNum, methodList);
 //		ClientRun pkmnClient = new ClientRun();
 //		Thread t = new Thread(pkmnClient);
 //		t.start();
@@ -62,6 +65,8 @@ public class StartFile {
 		LibraryClassCollector objects = new LibraryClassCollector();
 		ArrayList<Class> classList = objects.getClasses();
 		ArrayList<Object[]> methodList = getMethodNames(classList);
+		int methodNum = methodList.size();
+		JSONArray allJSONlinks = createJSONLinksStatic(methodNum, methodList);
 		ClientRun libClient = new ClientRun();
 		Thread t = new Thread(libClient);
 		t.start();
@@ -69,6 +74,9 @@ public class StartFile {
 		// To run Pokemon
 //		PokemonClassCollector objects = new PokemonClassCollector();
 //		ArrayList<Class> classList = objects.getClasses();
+//		ArrayList<Object[]> methodList = getMethodNames(classList);
+//		int methodNum = methodList.size();
+//		JSONArray allJSONlinks = createJSONRealLinks(methodNum, methodList);
 //		ArrayList<Object[]> methodList = getMethodNames(classList);
 //		ClientRun pkmnClient = new ClientRun();
 //		Thread t = new Thread(pkmnClient);
@@ -109,7 +117,8 @@ public class StartFile {
 			
 			JSONObject nodesAndLinks = new JSONObject();
 			nodesAndLinks.put("nodes", createJSONMethods(methodList));
-			nodesAndLinks.put("links", createJSONLinks(methodPairs, methodList));
+			//nodesAndLinks.put("links", createJSONLinksStack(methodPairs, methodList));
+			nodesAndLinks.put("links", allJSONlinks);
 			System.out.println(nodesAndLinks);
 			
 			try {
@@ -254,7 +263,7 @@ public class StartFile {
 	 *  Uses stackMethods is a pair of Methods that will be linked together (because of method calls), 
 	 *  and allMethods is the list of all our methods from all classes.
 	 */
-	public static JSONArray createJSONLinks(ArrayList<String[]> stackMethods, ArrayList<Object[]> allMethods){
+	public static JSONArray createJSONLinksStack(ArrayList<String[]> stackMethods, ArrayList<Object[]> allMethods){
 		JSONObject allLinks = new JSONObject();
 		JSONArray listLinks = new JSONArray();
 		
@@ -287,5 +296,35 @@ public class StartFile {
 		//System.out.println(allLinks);
 		return listLinks;
 	}
+	
+	
+	// Somewhere on stack overflow on how to make random numbers
+	public static int rand(int min, int max){
+		Random rand = new Random();
+		int randomNum = rand.nextInt((max-min)+1)+min;
+		return randomNum;
+	}
+	public static JSONArray createJSONLinksStatic(int numMethods, ArrayList<Object[]> allMethods){
+		JSONObject allLinks = new JSONObject();
+		JSONArray listLinks = new JSONArray();
+		
+		for (Object[] m : allMethods){
+			int links = rand(0,3);
+			
+			for (int i=0; i<links; i++){
+				JSONObject link = new JSONObject();
+				link.put("source", m[2]);
+				link.put("target", rand(0,numMethods));
+				link.put("value", 1);
+				listLinks.add(link);
+			}
+			return listLinks;
+		}
+	//allLinks.put("links", listLinks);
+	
+	//Dynamically shows JSON objects as program is running of Links between methods (stack trace)
+	//System.out.println(allLinks);
+	return listLinks;
+}
 }
 
