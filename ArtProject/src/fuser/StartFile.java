@@ -62,26 +62,26 @@ public class StartFile {
 //		t.start();
 		
 		// To run Library
-//		LibraryClassCollector objects = new LibraryClassCollector();
-//		ArrayList<Class> classList = objects.getClasses();
-//		ArrayList<Object[]> methodList = getMethodNames(classList);
-//		int methodNum = methodList.size();
-//		JSONArray allJSONlinks = createJSONLinksStatic(methodNum, methodList);
-//		ArrayList<Object[]> objList = getLibObjectNumber();
-//		ClientRun libClient = new ClientRun();
-//		Thread t = new Thread(libClient);
-//		t.start();
-		
-		// To run Pokemon
-		PokemonClassCollector objects = new PokemonClassCollector();
+		LibraryClassCollector objects = new LibraryClassCollector();
 		ArrayList<Class> classList = objects.getClasses();
 		ArrayList<Object[]> methodList = getMethodNames(classList);
 		int methodNum = methodList.size();
 		JSONArray allJSONlinks = createJSONLinksStatic(methodNum, methodList);
-		ArrayList<Object[]> objList = getPkmnObjectNumber();
-		ClientRun pkmnClient = new ClientRun();
-		Thread t = new Thread(pkmnClient);
+		ArrayList<Object[]> objList = getLibObjectNumber();
+		ClientRun libClient = new ClientRun();
+		Thread t = new Thread(libClient);
 		t.start();
+		
+		// To run Pokemon
+//		PokemonClassCollector objects = new PokemonClassCollector();
+//		ArrayList<Class> classList = objects.getClasses();
+//		ArrayList<Object[]> methodList = getMethodNames(classList);
+//		int methodNum = methodList.size();
+//		JSONArray allJSONlinks = createJSONLinksStatic(methodNum, methodList);
+//		ArrayList<Object[]> objList = getPkmnObjectNumber();
+//		ClientRun pkmnClient = new ClientRun();
+//		Thread t = new Thread(pkmnClient);
+//		t.start();
 		
 		
 		// Demo for TAs to see our JSON objects for nodes. MUST COMMENT OUT LINE 74 AND 167. Its line 3 of the console
@@ -118,7 +118,7 @@ public class StartFile {
 			
 			JSONObject nodesAndLinks = new JSONObject();
 			nodesAndLinks.put("nodes", createJSONMethods(methodList));
-			//nodesAndLinks.put("links", createJSONLinksStack(methodPairs, methodList));
+			nodesAndLinks.put("stacklinks", createJSONLinksStack(methodPairs, methodList));
 			nodesAndLinks.put("objects", createJSONObjects(objList));
 			nodesAndLinks.put("links", allJSONlinks);
 			System.out.println(nodesAndLinks);
