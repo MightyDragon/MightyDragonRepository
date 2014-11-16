@@ -40,8 +40,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.StringWriter; 
 import java.io.PrintWriter;
 
@@ -76,8 +79,18 @@ public class StartFile {
 		PokemonClassCollector objects = new PokemonClassCollector();
 		ArrayList<Class> classList = objects.getClasses();
 		ArrayList<Object[]> methodList = getMethodNames(classList);
-		int methodNum = methodList.size();
-		JSONArray allJSONlinks = createJSONLinksStatic(methodNum, methodList);
+		ArrayList<Method> methodArray = getMethodArray(methodList);
+		ArrayList<ArrayList<Method>> methodLinkPairs = new ArrayList<ArrayList<Method>>();
+		try {
+			methodLinkPairs = getLinkPairs(methodArray);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			System.out.println("ERROR -- problem generating call heirarchy");
+		}
+		//int methodNum = methodList.size();
+		//JSONArray allJSONlinks = createJSONLinksStatic(methodNum, methodList);
+		JSONArray allJSONlinks = createJSONCallHeirarchy(methodLinkPairs, methodList);
 		ArrayList<Object[]> objList = getPkmnObjectNumber();
 		ClientRun pkmnClient = new ClientRun();
 		Thread t = new Thread(pkmnClient);
@@ -170,8 +183,35 @@ public class StartFile {
 	 *  Have not implemented yet however we will use this as a resource:
 	 *  Credit: I asked this question on stack overflow http://stackoverflow.com/questions/26554990/how-to-get-all-possible-callers-of-a-method-in-java-like-call-heirarchy
 	 */
-	public static ArrayList<String[]> getLinkPairs(ArrayList<Method> methods){
-		return null;
+	public static ArrayList<ArrayList<Method>> getLinkPairs(ArrayList<Method> methods) throws Exception{
+		ArrayList<ArrayList<Method>> links = new ArrayList<ArrayList<Method>>();
+
+		InputStream inAbility = new FileInputStream("pokePackage/src/model/Ability.java");
+//		InputStream InputStream inActivePkmn = new FileInputStream("pokePackage/src/model/ActivePkmn.java");
+		InputStream inMove = new FileInputStream("pokePackage/src/model/Move.java");
+		InputStream inNature = new FileInputStream("pokePackage/src/model/Nature.java");
+		InputStream inPkmn = new FileInputStream("pokePackage/src/model/Pkmn.java");
+		InputStream inSpecies = new FileInputStream("pokePackage/src/model/Species.java");
+		InputStream inStatus = new FileInputStream("pokePackage/src/model/Status.java");
+		InputStream inType = new FileInputStream("pokePackage/src/model/Type.java");
+		InputStream inWeather = new FileInputStream("pokePackage/src/model/Weather.java");
+
+		InputStream inClient = new FileInputStream("pokePackage/src/simulator/Client.java");
+		InputStream inGenVSim = new FileInputStream("pokePackage/src/simulator/GenVSim.java");
+
+		links.addAll(MethodLinkParser.generateMethodLinks(inAbility, methods));
+		links.addAll(MethodLinkParser.generateMethodLinks(inMove, methods));
+		links.addAll(MethodLinkParser.generateMethodLinks(inNature, methods));
+		links.addAll(MethodLinkParser.generateMethodLinks(inPkmn, methods));
+		links.addAll(MethodLinkParser.generateMethodLinks(inSpecies, methods));
+		links.addAll(MethodLinkParser.generateMethodLinks(inStatus, methods));
+		links.addAll(MethodLinkParser.generateMethodLinks(inType, methods));
+		links.addAll(MethodLinkParser.generateMethodLinks(inWeather, methods));
+
+		links.addAll(MethodLinkParser.generateMethodLinks(inClient, methods));
+		links.addAll(MethodLinkParser.generateMethodLinks(inGenVSim, methods));
+
+		return links;
 	}
 	
 	/* Gets an Object[] of class name and object count in that class for pokemon
@@ -390,7 +430,41 @@ public class StartFile {
 		return listLinks;
 	}
 	
-	
+	public static JSONArray createJSONCallHeirarchy(ArrayList<ArrayList<Method>> stackMethods, ArrayList<Object[]> allMethods){
+		JSONObject allLinks = new JSONObject();
+		JSONArray listLinks = new JSONArray();
+		
+		for (ArrayList<Method> pair : stackMethods){
+			JSONObject link = new JSONObject();
+			boolean first = false;
+			boolean second = false;
+			Method m1 = pair.get(0);
+			Method m2 = pair.get(1);
+			for (Object[] currentMethod : allMethods){
+
+				if(m1.getName().equals(((Method) currentMethod[0]).getName())){
+					link.put("source", currentMethod[2]);
+					first = true;
+				}
+				
+				if(m2.getName().equals(((Method) currentMethod[0]).getName())){
+					link.put("target", currentMethod[2]);
+					second = true;
+				}
+			}
+			link.put("value", 1);
+			
+			// Both methods in the pair must be found in order to create link between method nodes
+			if(first && second){
+				listLinks.add(link);
+			}
+		}
+		//allLinks.put("links", listLinks);
+		
+		//Dynamically shows JSON objects as program is running of Links between methods (stack trace)
+		//System.out.println(allLinks);
+		return listLinks;
+	}
 	// Somewhere on stack overflow on how to make random numbers
 	public static int rand(int min, int max){
 		Random rand = new Random();

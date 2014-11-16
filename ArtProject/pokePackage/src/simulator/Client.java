@@ -1411,7 +1411,9 @@ public class Client {
 		Charset charset = Charset.forName("US-ASCII");
 		Path path = FileSystems.getDefault().getPath("results", "results(" + endTime + ").txt");
 		
-		try (BufferedWriter writer = Files.newBufferedWriter(path, charset)) {
+		
+		try {
+			BufferedWriter writer = Files.newBufferedWriter(path, charset);
 		    writer.write(outputString, 0, outputString.length());
 		} catch (IOException x) {
 		    System.err.format("IOException: %s%n", x);
