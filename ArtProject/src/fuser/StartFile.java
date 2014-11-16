@@ -78,6 +78,7 @@ public class StartFile {
 		ArrayList<Object[]> methodList = getMethodNames(classList);
 		int methodNum = methodList.size();
 		JSONArray allJSONlinks = createJSONLinksStatic(methodNum, methodList);
+//		JSONArray allJSONlinks = new JSONArray();
 		ArrayList<Object[]> objList = getPkmnObjectNumber();
 		ClientRun pkmnClient = new ClientRun();
 		Thread t = new Thread(pkmnClient);
@@ -121,6 +122,7 @@ public class StartFile {
 			//nodesAndLinks.put("links", createJSONLinksStack(methodPairs, methodList));
 			nodesAndLinks.put("objects", createJSONObjects(objList));
 			nodesAndLinks.put("links", allJSONlinks);
+			nodesAndLinks.put("stacklinks",createJSONLinksStack(methodPairs, methodList));
 			System.out.println(nodesAndLinks);
 			
 			try {
@@ -145,8 +147,8 @@ public class StartFile {
 		for (Class c : classes){
 			Method[] cMethods = c.getDeclaredMethods();
 			for (Method m : cMethods){
-				int x = (new Random()).nextInt(400)+250;
-				int y = (new Random()).nextInt(200)+150;
+				int x = (new Random()).nextInt(900)+150;
+				int y = (new Random()).nextInt(400)+150;
 				Object[] p = {m, c,currentNumber, x, y};
 				pairs.add(p);
 				currentNumber++;
@@ -251,8 +253,8 @@ public class StartFile {
 				int classObjectNum = (int) o[1];
 				for (int i=0; i<classObjectNum; i++){
 					JSONObject obj = new JSONObject();
-					obj.put("x", (new Random()).nextInt(750)+100);
-					obj.put("y", (new Random()).nextInt(400)+50);
+					obj.put("x", (new Random()).nextInt(1180)+10);
+					obj.put("y", (new Random()).nextInt(680)+10);
 					obj.put("group", classNum);
 					listObjects.add(obj);
 				}
@@ -273,8 +275,6 @@ public class StartFile {
 		JSONArray listMethods = new JSONArray();
 		int groupNum = 0;
 		String curClass = "";
-		
-		boolean highlightedAlready = true;
 		
 		//objects instantiated in Pokemon 
 //		System.out.println("--------------------------fuck the police -----------------------");
@@ -321,9 +321,13 @@ public class StartFile {
 //		}
 		
 		
-		
+		boolean highlightedAlready = false;
 		for (Object[] m : classList){
 			JSONObject meth = new JSONObject();
+			int randNum = (new Random()).nextInt(100);
+			if (randNum == 0) {
+				highlightedAlready = true;
+			}
 			Method methodz = (Method)m[0];
 			Class classz = (Class)m[1];
 			meth.put("name", methodz.getName());

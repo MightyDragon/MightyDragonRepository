@@ -9,6 +9,12 @@
 
 .link {
   stroke: #999;
+  stroke-opacity: .5;
+}
+
+.stacklink {
+  stroke: #ff0000;
+  stroke-opacity: .5;
 }
 
 </style>
@@ -16,21 +22,22 @@
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script>
 
-var width = 960,
-    height = 500;
+var width = 1200,
+    height = 700;
     
 var color = d3.scale.category20();
 
 var i = 1,
-    n = 20;
+    n = 10000;
+    
+    var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
 
 function aloop() {
 
-d3.select("body").selectAll("svg").remove();
 
-var svg = d3.select("body").append("svg")
-    .attr("width", width)
-    .attr("height", height);
+
 
 
 d3.json("json/miserables" + i + ".json", function(error, graph) {
@@ -39,11 +46,26 @@ d3.json("json/miserables" + i + ".json", function(error, graph) {
     d.source = graph.nodes[d.source];
     d.target = graph.nodes[d.target];
   });
+  
+  graph.stacklinks.forEach(function(d) {
+    d.source = graph.nodes[d.source];
+    d.target = graph.nodes[d.target];
+  });
 
   var link = svg.append("g")
       .attr("class", "link")
     .selectAll("line")
       .data(graph.links)
+    .enter().append("line")
+      .attr("x1", function(d) { return d.source.x; })
+      .attr("y1", function(d) { return d.source.y; })
+      .attr("x2", function(d) { return d.target.x; })
+      .attr("y2", function(d) { return d.target.y; });
+      
+  var stacklink = svg.append("g")
+      .attr("class", "stacklink")
+    .selectAll("line")
+      .data(graph.stacklinks)
     .enter().append("line")
       .attr("x1", function(d) { return d.source.x; })
       .attr("y1", function(d) { return d.source.y; })
@@ -83,9 +105,13 @@ d3.json("json/miserables" + i + ".json", function(error, graph) {
           link.filter(function(l) { return l.source === d; }).attr("x1", d.x).attr("y1", d.y);
           link.filter(function(l) { return l.target === d; }).attr("x2", d.x).attr("y2", d.y);
         }));
+        
+        
+        
 });
 
-setTimeout(function() { i++; if (i < n) { aloop(); }}, 1000);
+setTimeout(function() { i++; if (i < n) { aloop(); d3.select("body").selectAll("line").remove();
+d3.select("body").selectAll("circle").remove();}}, 100);
 
 };
 
