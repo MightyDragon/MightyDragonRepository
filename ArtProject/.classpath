@@ -3,6 +3,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="pokePackage"/>
 	<classpathentry kind="src" path="LibPackage"/>
+	<classpathentry excluding="test/japa/parser/ast/test/" kind="src" path="JavaParser"/>
 	<classpathentry kind="lib" path="jars/json-simple-1.1.1.jar"/>
 	<classpathentry kind="lib" path="jars/reflections-0.9.9-RC1-uberjar.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
