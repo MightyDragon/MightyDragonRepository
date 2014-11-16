@@ -71,14 +71,13 @@ public class StartFile {
 //		ClientRun libClient = new ClientRun();
 //		Thread t = new Thread(libClient);
 //		t.start();
-		
+//		
 		// To run Pokemon
 		PokemonClassCollector objects = new PokemonClassCollector();
 		ArrayList<Class> classList = objects.getClasses();
 		ArrayList<Object[]> methodList = getMethodNames(classList);
 		int methodNum = methodList.size();
 		JSONArray allJSONlinks = createJSONLinksStatic(methodNum, methodList);
-//		JSONArray allJSONlinks = new JSONArray();
 		ArrayList<Object[]> objList = getPkmnObjectNumber();
 		ClientRun pkmnClient = new ClientRun();
 		Thread t = new Thread(pkmnClient);
@@ -119,7 +118,7 @@ public class StartFile {
 			
 			JSONObject nodesAndLinks = new JSONObject();
 			nodesAndLinks.put("nodes", createJSONMethods(methodList));
-			//nodesAndLinks.put("links", createJSONLinksStack(methodPairs, methodList));
+			nodesAndLinks.put("stacklinks", createJSONLinksStack(methodPairs, methodList));
 			nodesAndLinks.put("objects", createJSONObjects(objList));
 			nodesAndLinks.put("links", allJSONlinks);
 			nodesAndLinks.put("stacklinks",createJSONLinksStack(methodPairs, methodList));
