@@ -25,7 +25,7 @@ public class Client {
 	public Client(){
 		//this.mainPokemon();
 	}
-	public static void mainPokemon() {
+	public static void mainFile() {
 		
 		List<Pkmn> battleList = new ArrayList<Pkmn>();
 		List<Pkmn> battleList2 = new ArrayList<Pkmn>();

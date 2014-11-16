@@ -21,7 +21,7 @@ public class ClientRun implements Runnable {
 		
 		//For running Pokemon
 		Client pokemonClient = new Client();
-		pokemonClient.mainPokemon();
+		pokemonClient.mainFile();
 		
 		
 		//For running Library

@@ -68,13 +68,21 @@ public class StartFile {
 //		LibraryClassCollector objects = new LibraryClassCollector();
 //		ArrayList<Class> classList = objects.getClasses();
 //		ArrayList<Object[]> methodList = getMethodNames(classList);
-//		int methodNum = methodList.size();
-//		JSONArray allJSONlinks = createJSONLinksStatic(methodNum, methodList);
+//		ArrayList<Method> methodArray = getMethodArray(methodList);
+//		ArrayList<ArrayList<Method>> methodLinkPairs = new ArrayList<ArrayList<Method>>();
+//		try {
+//			methodLinkPairs = getLinkPairsLibrary(methodArray);
+//		} catch (Exception e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//			System.out.println("ERROR -- problem generating call heirarchy");
+//		}
+//		JSONArray allJSONlinks = createJSONCallHeirarchy(methodLinkPairs, methodList);
 //		ArrayList<Object[]> objList = getLibObjectNumber();
 //		ClientRun libClient = new ClientRun();
 //		Thread t = new Thread(libClient);
 //		t.start();
-//		
+		
 		// To run Pokemon
 		PokemonClassCollector objects = new PokemonClassCollector();
 		ArrayList<Class> classList = objects.getClasses();
@@ -82,14 +90,12 @@ public class StartFile {
 		ArrayList<Method> methodArray = getMethodArray(methodList);
 		ArrayList<ArrayList<Method>> methodLinkPairs = new ArrayList<ArrayList<Method>>();
 		try {
-			methodLinkPairs = getLinkPairs(methodArray);
+			methodLinkPairs = getLinkPairsPokemon(methodArray);
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 			System.out.println("ERROR -- problem generating call heirarchy");
 		}
-		//int methodNum = methodList.size();
-		//JSONArray allJSONlinks = createJSONLinksStatic(methodNum, methodList);
 		JSONArray allJSONlinks = createJSONCallHeirarchy(methodLinkPairs, methodList);
 		ArrayList<Object[]> objList = getPkmnObjectNumber();
 		ClientRun pkmnClient = new ClientRun();
@@ -130,7 +136,7 @@ public class StartFile {
 //			createJSONLinks(methodPairs, methodList);
 			
 			JSONObject nodesAndLinks = new JSONObject();
-			nodesAndLinks.put("nodes", createJSONMethods(methodList));
+			nodesAndLinks.put("nodes", createJSONMethods(methodList, methodPairs));
 			nodesAndLinks.put("stacklinks", createJSONLinksStack(methodPairs, methodList));
 			nodesAndLinks.put("objects", createJSONObjects(objList));
 			nodesAndLinks.put("links", allJSONlinks);
@@ -183,7 +189,7 @@ public class StartFile {
 	 *  Have not implemented yet however we will use this as a resource:
 	 *  Credit: I asked this question on stack overflow http://stackoverflow.com/questions/26554990/how-to-get-all-possible-callers-of-a-method-in-java-like-call-heirarchy
 	 */
-	public static ArrayList<ArrayList<Method>> getLinkPairs(ArrayList<Method> methods) throws Exception{
+	public static ArrayList<ArrayList<Method>> getLinkPairsPokemon(ArrayList<Method> methods) throws Exception{
 		ArrayList<ArrayList<Method>> links = new ArrayList<ArrayList<Method>>();
 
 		InputStream inAbility = new FileInputStream("pokePackage/src/model/Ability.java");
@@ -211,6 +217,35 @@ public class StartFile {
 		links.addAll(MethodLinkParser.generateMethodLinks(inClient, methods));
 		links.addAll(MethodLinkParser.generateMethodLinks(inGenVSim, methods));
 
+		return links;
+	}
+	
+	public static ArrayList<ArrayList<Method>> getLinkPairsLibrary(ArrayList<Method> methods) throws Exception{
+		ArrayList<ArrayList<Method>> links = new ArrayList<ArrayList<Method>>();
+		
+		ArrayList<InputStream> inputs = new ArrayList<InputStream>();
+		inputs.add(new FileInputStream("LibPackage/main/DatabaseHandler.java"));
+		inputs.add(new FileInputStream("LibPackage/main/MainLibrary.java"));
+		inputs.add(new FileInputStream("LibPackage/main/OracleConnection.java"));
+		inputs.add(new FileInputStream("LibPackage/ui/MainFrame.java"));
+		inputs.add(new FileInputStream("LibPackage/ui/NotificationDialog.java"));
+		inputs.add(new FileInputStream("LibPackage/ui/TopMenuBar.java"));
+		inputs.add(new FileInputStream("LibPackage/ui/borrower/AccountInfoDialog.java"));
+		inputs.add(new FileInputStream("LibPackage/ui/borrower/PayFineDialog.java"));
+		inputs.add(new FileInputStream("LibPackage/ui/borrower/PlaceHoldDialog.java"));
+		inputs.add(new FileInputStream("LibPackage/ui/borrower/SearchDialog.java"));
+		inputs.add(new FileInputStream("LibPackage/ui/clerk/AddBorrowerDialog.java"));
+		inputs.add(new FileInputStream("LibPackage/ui/clerk/CheckOutDialog.java"));
+		inputs.add(new FileInputStream("LibPackage/ui/clerk/CheckOverdueDialog.java"));
+		inputs.add(new FileInputStream("LibPackage/ui/clerk/ReturnDialog.java"));
+		inputs.add(new FileInputStream("LibPackage/ui/librarian/AddBookDialog.java"));
+		inputs.add(new FileInputStream("LibPackage/ui/librarian/CheckOutReportDialog.java"));
+		inputs.add(new FileInputStream("LibPackage/ui/librarian/MostPopularDialog.java"));
+		
+		for (InputStream in : inputs) {
+			links.addAll(MethodLinkParser.generateMethodLinks(in, methods));
+		}
+		
 		return links;
 	}
 	
@@ -309,71 +344,31 @@ public class StartFile {
 	 */
 	
 	// Uses Object[0] where [0] is Method and [1] is Class to create JSON object for Visualizer
-	public static JSONArray createJSONMethods(ArrayList<Object[]> classList){
+	public static JSONArray createJSONMethods(ArrayList<Object[]> classList, ArrayList<String[]> methodPairs){
 		JSONObject allMethods = new JSONObject();
 		JSONArray listMethods = new JSONArray();
 		int groupNum = 0;
 		String curClass = "";
+		String[] currentMethodPair;
 		
-		//objects instantiated in Pokemon 
-//		System.out.println("--------------------------fuck the police -----------------------");
-//		System.out.println("Number of Ability: " + Ability.getCounter());
-//		System.out.println("Number of Move: " + Move.getCounter());
-//		System.out.println("Number of Nature: " + Nature.getCounter());
-//		System.out.println("Number of Pkmn: " + Pkmn.getCounter());
-//		System.out.println("Number of Species: " + Species.getCounter());
-//		System.out.println("Number of Status: " + Status.getCounter());
-//		System.out.println("Number of Weather: " + Weather.getCounter());
-//		System.out.println("Number of GenVSim: " + GenVSim.getCounter());
+		if (methodPairs != null && !methodPairs.isEmpty()){
+			currentMethodPair = methodPairs.get(0);
+		}else{
+			String[] m = {"mainFile", "mainFile"};
+			currentMethodPair = m;
+		}
 		
-		//objects instantiated in Library
-//		System.out.println("Number of DatabaseHandler: " + DatabaseHandler.getCounter());
-//		System.out.println("Number of OracleConnection: " + OracleConnection.getCounter());
-//		System.out.println("Number of MainFrame: " + MainFrame.getCounter());
-//		System.out.println("Number of NotificationDialog: " + NotificationDialog.getCounter());
-//		System.out.println("Number of TopMenuBar: " + TopMenuBar.getCounter());
-//		System.out.println("Number of AccountInfoDialog: " + AccountInfoDialog.getCounter());
-//		System.out.println("Number of PayFineDialog: " + PayFineDialog.getCounter());
-//		System.out.println("Number of PlaceHoldDialog: " + PlaceHoldDialog.getCounter());
-//		System.out.println("Number of SearchDialog: " + SearchDialog.getCounter());
-//		System.out.println("Number of AddBorrowerDialog: " + AddBorrowerDialog.getCounter());
-//		System.out.println("Number of CheckOutDialog: " + CheckOutDialog.getCounter());
-//		System.out.println("Number of CheckOverdueDialog: " + CheckOverdueDialog.getCounter());
-//		System.out.println("Number of ReturnDialog: " + ReturnDialog.getCounter());
-//		System.out.println("Number of AddBookDialog: " + AddBookDialog.getCounter());
-//		System.out.println("Number of CheckOutReportDialog: " + CheckOutReportDialog.getCounter());
-//		System.out.println("Number of MostPopularDialog: " + MostPopularDialog.getCounter());
-
-		
-//		Map<JSONObject, ArrayList<Object>> map = new HashMap<JSONObject, ArrayList<Object>>();
-//		ArrayList<Object> values = new ArrayList<Object>();
-//		
-//		values.add((new Random()).nextInt(400)+250);
-//		values.add((new Random()).nextInt(200)+150);
-//		map.put(allMethods, values);
-		
-//		for (Object[] m : classList){
-//			int x = (new Random()).nextInt(400)+250;
-//			int y = (new Random()).nextInt(200)+150;
-//			m[2] = x;
-//			m[3] = y;
-//		}
-		
-		
-		boolean highlightedAlready = false;
+		//boolean highlightedAlready = false;
 		for (Object[] m : classList){
 			JSONObject meth = new JSONObject();
-			int randNum = (new Random()).nextInt(100);
-			if (randNum == 0) {
-				highlightedAlready = true;
-			}
+
 			Method methodz = (Method)m[0];
 			Class classz = (Class)m[1];
 			meth.put("name", methodz.getName());
 			meth.put("group", groupNum);
-			if (highlightedAlready) {
+			if (methodz.getName().equals(currentMethodPair[0])) {
 				meth.put("highlight","t");
-				highlightedAlready = false;
+				//highlightedAlready = false;
 			} else {
 				meth.put("highlight","f");
 			}
