@@ -1402,7 +1402,7 @@ public class Move {
 	}
 
 
-	public String getName() {
+	public String getNameMove() {
 		return name;
 	}
 
@@ -1601,7 +1601,7 @@ public class Move {
 			// TODO: check that Dry Skin activates for status Water attacks (in-game testing needed -- websites give no definite answer)
 			if ((target.ability == Ability.DRY_SKIN || target.ability == Ability.WATER_ABSORB) && this.type == Type.WATER) {
 				if (showText) {
-					System.out.println(target.getName() + "'s " + target.ability.getName() + " absorbed the attack!");
+					System.out.println(target.getName() + "'s " + target.ability.getNameAbility() + " absorbed the attack!");
 				}
 				target.heal((int) (target.totalHP/4), showText);
 				return;
@@ -1610,7 +1610,7 @@ public class Move {
 			// volt absorb
 			if (target.ability == Ability.VOLT_ABSORB && this.type == Type.ELECTRIC) {
 				if (showText) {
-					System.out.println(target.getName() + "'s " + target.ability.getName() + " absorbed the attack!"); // TODO: different text when at full health
+					System.out.println(target.getName() + "'s " + target.ability.getNameAbility() + " absorbed the attack!"); // TODO: different text when at full health
 				}
 				target.heal((int) (target.totalHP/4), showText);
 				return;
@@ -1619,7 +1619,7 @@ public class Move {
 			// flash fire
 			if (target.ability == Ability.FLASH_FIRE && this.type == Type.FIRE) {
 				if (showText) {
-					System.out.println(target.getName() + "'s " + target.ability.getName() + " absorbed the attack!"); // TODO: different text when at full health
+					System.out.println(target.getName() + "'s " + target.ability.getNameAbility() + " absorbed the attack!"); // TODO: different text when at full health
 				}
 				target.flashFire = true;
 				return;
@@ -1628,7 +1628,7 @@ public class Move {
 			// sap sipper
 			if (target.ability == Ability.SAP_SIPPER && this.type == Type.GRASS && name != "Aromatherapy") {
 				if (showText) {
-					System.out.println(target.getName() + "'s " + target.ability.getName() + " absorbed the attack!");
+					System.out.println(target.getName() + "'s " + target.ability.getNameAbility() + " absorbed the attack!");
 					System.out.println(target.getName() + "'s special attack rose!");
 				}
 				target.incAttackMod();
@@ -1864,7 +1864,7 @@ public class Move {
 				
 				if (target.ability == Ability.CLEAR_BODY || target.ability == Ability.WHITE_SMOKE) {
 					if (showText) {
-						System.out.println(target.getName() + "'s " + target.ability.getName() + " prevents stat reduction!");
+						System.out.println(target.getName() + "'s " + target.ability.getNameAbility() + " prevents stat reduction!");
 					}
 				} else {
 					for(String s : statDownsFoe) {
@@ -2122,7 +2122,7 @@ public class Move {
 		// dry skin (heal) / water absorb
 		if ((target.ability == Ability.DRY_SKIN || target.ability == Ability.WATER_ABSORB) && this.type == Type.WATER) {
 			if (showText) {
-				System.out.println(target.getName() + "'s " + target.ability.getName() + " absorbed the attack!"); // TODO: different text when at full health
+				System.out.println(target.getName() + "'s " + target.ability.getNameAbility() + " absorbed the attack!"); // TODO: different text when at full health
 			}
 			target.heal((int) (target.totalHP/4), showText);
 			return;
@@ -2131,7 +2131,7 @@ public class Move {
 		// volt absorb
 		if (target.ability == Ability.VOLT_ABSORB && this.type == Type.ELECTRIC) {
 			if (showText) {
-				System.out.println(target.getName() + "'s " + target.ability.getName() + " absorbed the attack!"); // TODO: different text when at full health
+				System.out.println(target.getName() + "'s " + target.ability.getNameAbility() + " absorbed the attack!"); // TODO: different text when at full health
 			}
 			target.heal((int) (target.totalHP/4), showText);
 			return;
@@ -2140,7 +2140,7 @@ public class Move {
 		// flash fire
 		if (target.ability == Ability.FLASH_FIRE && this.type == Type.FIRE) {
 			if (showText) {
-				System.out.println(target.getName() + "'s " + target.ability.getName() + " absorbed the attack!"); // TODO: text for boost
+				System.out.println(target.getName() + "'s " + target.ability.getNameAbility() + " absorbed the attack!"); // TODO: text for boost
 			}
 			target.flashFire = true;
 			return;
@@ -2149,7 +2149,7 @@ public class Move {
 		// sap sipper
 		if (target.ability == Ability.SAP_SIPPER && this.type == Type.GRASS && name != "Aromatherapy") {
 			if (showText) {
-				System.out.println(target.getName() + "'s " + target.ability.getName() + " absorbed the attack!");
+				System.out.println(target.getName() + "'s " + target.ability.getNameAbility() + " absorbed the attack!");
 				System.out.println(target.getName() + "'s special attack rose!");
 			}
 			target.incAttackMod();
@@ -2673,7 +2673,7 @@ public class Move {
 		return flinchAccuracy;
 	}
 	
-	public static int getCounter() {
+	public static int getCounterMove() {
 	    return counter;
 	}
 

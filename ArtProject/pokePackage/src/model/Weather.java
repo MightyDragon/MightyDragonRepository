@@ -16,7 +16,7 @@ public class Weather {
 		counter++;
 	}
 	
-	public static int getCounter() {
+	public static int getCounterWeather() {
 	    return counter;
 	}
 

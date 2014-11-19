@@ -234,11 +234,11 @@ public class Ability {
 		counter++;
 	}
 	
-	public String getName() {
+	public String getNameAbility() {
 		return name;
 	}
 	
-	public static int getCounter() {
+	public static int getCounterAbility() {
 	    return counter;
 	}
 

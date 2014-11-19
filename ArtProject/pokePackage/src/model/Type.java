@@ -313,7 +313,7 @@ public class Type {
 		counter++;
 	}
 	
-	public String getName() {
+	public String getNameType() {
 		return name;
 	}
 
@@ -381,7 +381,7 @@ public class Type {
 		defendImmune.add(t);
 	}
 
-	public static int getCounter() {
+	public static int getCounterType() {
 	    return counter;
 	}
 	

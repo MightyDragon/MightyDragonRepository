@@ -242,21 +242,21 @@ public class StartFile {
 	
 	public static ArrayList<Object[]> getPkmnObjectNumber(){
 		ArrayList<Object[]> pairs = new ArrayList<Object[]>();
-		Object[] p1 = {"Ability", Ability.getCounter()};
+		Object[] p1 = {"Ability", Ability.getCounterAbility()};
 		pairs.add(p1);
-		Object[] p2 = {"Move", Move.getCounter()};
+		Object[] p2 = {"Move", Move.getCounterMove()};
 		pairs.add(p2);
-		Object[] p3 = {"Nature", Nature.getCounter()};
+		Object[] p3 = {"Nature", Nature.getCounterNature()};
 		pairs.add(p3);
-		Object[] p4 = {"Pkmn", Pkmn.getCounter()};
+		Object[] p4 = {"Pkmn", Pkmn.getCounterPkmn()};
 		pairs.add(p4);
-		Object[] p5 = {"Species", Species.getCounter()};
+		Object[] p5 = {"Species", Species.getCounterSpecies()};
 		pairs.add(p5);
-		Object[] p6 = {"Status", Status.getCounter()};
+		Object[] p6 = {"Status", Status.getCounterStatus()};
 		pairs.add(p6);
-		Object[] p7 = {"Weather", Weather.getCounter()};
+		Object[] p7 = {"Weather", Weather.getCounterWeather()};
 		pairs.add(p7);
-		Object[] p8 = {"GenVSim",  GenVSim.getCounter()};
+		Object[] p8 = {"GenVSim",  GenVSim.getCounterGenVSim()};
 		pairs.add(p8);
 		
 		return pairs;

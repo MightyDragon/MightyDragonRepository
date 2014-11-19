@@ -194,22 +194,22 @@ public class Pkmn {
 	}
 	
 	// TODO: (for all "setMove"s) check for moves already set, decide action (overwrite/delete?)
-	public void setMoveset(Move m1, Move m2, Move m3, Move m4) {
+	public void setMoveset4(Move m1, Move m2, Move m3, Move m4) {
 		setMove4(m4);
-		setMoveset(m1, m2, m3);
+		setMoveset3(m1, m2, m3);
 	}
 
-	public void setMoveset(Move m1, Move m2, Move m3) {
+	public void setMoveset3(Move m1, Move m2, Move m3) {
 		setMove3(m3);
-		setMoveset(m1, m2);
+		setMoveset2(m1, m2);
 	}
 
-	public void setMoveset(Move m1, Move m2) {
+	public void setMoveset2(Move m1, Move m2) {
 		setMove2(m2);
-		setMoveset(m1);
+		setMoveset1(m1);
 	}
 
-	public void setMoveset(Move m1) {
+	public void setMoveset1(Move m1) {
 //		System.out.println(Thread.currentThread().toString());
 		setMove1(m1);
 	}
@@ -619,7 +619,7 @@ public class Pkmn {
 	
 	// Returns: usedMove - true if move used in a way that counts as a turn; false otherwise
 	// If i == 0, use Struggle
-	public boolean useMove(int i, Pkmn target, boolean showText) {
+	public boolean useMoveIndex(int i, Pkmn target, boolean showText) {
 		boolean usedMove = false;
 		switch (i) {
 		// TODO: check for things that block moves (disable, taunt, etc)
@@ -628,7 +628,7 @@ public class Pkmn {
 					System.out.println("Out of PP!");
 				} else {
 					pp1--;
-					usedMove = useMove(move1, target, showText);
+					usedMove = useMoveFromPkmn(move1, target, showText);
 				}
 				break;
 			case 2:
@@ -636,7 +636,7 @@ public class Pkmn {
 					System.out.println("Out of PP!");
 				} else {
 					pp2--;
-					usedMove = useMove(move2, target, showText);
+					usedMove = useMoveFromPkmn(move2, target, showText);
 				}
 				break;
 			case 3:
@@ -644,7 +644,7 @@ public class Pkmn {
 					System.out.println("Out of PP!");
 				} else {
 					pp3--;
-					usedMove = useMove(move3, target, showText);
+					usedMove = useMoveFromPkmn(move3, target, showText);
 				}
 				break;
 			case 4:
@@ -652,7 +652,7 @@ public class Pkmn {
 					System.out.println("Out of PP!");
 				} else {
 					pp4--;
-					usedMove = useMove(move4, target, showText);
+					usedMove = useMoveFromPkmn(move4, target, showText);
 				}
 				break;
 			case 0:
@@ -666,7 +666,7 @@ public class Pkmn {
 		return usedMove;
 	}
 
-	private boolean useMove(Move m, Pkmn target, boolean showText) {
+	private boolean useMoveFromPkmn(Move m, Pkmn target, boolean showText) {
 		boolean usedMove = true;
 		// TODO: target selection!
 		m.useMove(this, target, showText);
@@ -781,7 +781,7 @@ public class Pkmn {
 		}
 	}
 	
-	public static int getCounter() {
+	public static int getCounterPkmn() {
 	    return counter;
 	}
 

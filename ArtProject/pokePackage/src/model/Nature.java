@@ -115,7 +115,7 @@ public class Nature {
 		return speedMod;
 	}
 	
-	public static int getCounter() {
+	public static int getCounterNature() {
 	    return counter;
 	}
 

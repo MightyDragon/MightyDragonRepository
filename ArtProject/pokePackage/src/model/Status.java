@@ -25,7 +25,7 @@ public class Status {
 		counter++;
 	}
 	
-	public static int getCounter() {
+	public static int getCounterStatus() {
 	    return counter;
 	}
 	

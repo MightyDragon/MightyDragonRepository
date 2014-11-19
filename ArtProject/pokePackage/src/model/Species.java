@@ -1489,7 +1489,7 @@ public class Species {
 		return baseSpDefence;
 	}
 	
-	public static int getCounter() {
+	public static int getCounterSpecies() {
 	    return counter;
 	}
 

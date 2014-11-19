@@ -120,7 +120,7 @@ public class GenVSim {
 							System.out.println(p1.getName() + " woke up!");
 						}
 						p1.setStatus(Status.OKAY);
-						p1.useMove(p1Move, p2, showText);
+						p1.useMoveIndex(p1Move, p2, showText);
 					}
 				}
 				else if (p1.getStatus().equals(Status.PARALYSIS) && Math.random() < 0.25) {
@@ -139,10 +139,10 @@ public class GenVSim {
 							System.out.println(p1.getName() + " is no longer frozen!"); // TODO: correct text?
 						}
 						p1.setStatus(Status.OKAY);
-						p1.useMove(p1Move, p2, showText);
+						p1.useMoveIndex(p1Move, p2, showText);
 					}
 				} else {
-					p1.useMove(p1Move, p2, showText);
+					p1.useMoveIndex(p1Move, p2, showText);
 				}
 				
 				if (isBattleOver()) { break; }
@@ -160,7 +160,7 @@ public class GenVSim {
 							System.out.println(p2.getName() + " woke up!");
 						}
 						p2.setStatus(Status.OKAY);
-						p2.useMove(p2Move, p1, showText);
+						p2.useMoveIndex(p2Move, p1, showText);
 					}
 				}
 				else if (p2.getStatus().equals(Status.PARALYSIS) && Math.random() < 0.25) {
@@ -179,7 +179,7 @@ public class GenVSim {
 							System.out.println(p2.getName() + " is no longer frozen!"); // TODO: correct text?
 						}
 						p2.setStatus(Status.OKAY);
-						p2.useMove(p2Move, p1, showText);
+						p2.useMoveIndex(p2Move, p1, showText);
 					}
 				} else {
 					// flinch
@@ -188,7 +188,7 @@ public class GenVSim {
 							System.out.println(p2.getName() + " flinched!");
 						}
 					} else {
-						p2.useMove(p2Move, p1, showText);
+						p2.useMoveIndex(p2Move, p1, showText);
 					}
 				}
 			} else {
@@ -206,7 +206,7 @@ public class GenVSim {
 							System.out.println(p2.getName() + " woke up!");
 						}
 						p2.setStatus(Status.OKAY);
-						p2.useMove(p2Move, p1, showText);
+						p2.useMoveIndex(p2Move, p1, showText);
 					}
 				}
 				else if (p2.getStatus().equals(Status.PARALYSIS) && Math.random() < 0.25) {
@@ -225,10 +225,10 @@ public class GenVSim {
 							System.out.println(p2.getName() + " is no longer frozen!"); // TODO: correct text?
 						}
 						p2.setStatus(Status.OKAY);
-						p2.useMove(p2Move, p1, showText);
+						p2.useMoveIndex(p2Move, p1, showText);
 					}
 				} else {
-					p2.useMove(p2Move, p1, showText);
+					p2.useMoveIndex(p2Move, p1, showText);
 				}
 				
 				if (isBattleOver()) { break; }
@@ -246,7 +246,7 @@ public class GenVSim {
 							System.out.println(p1.getName() + " woke up!");
 						}
 						p1.setStatus(Status.OKAY);
-						p1.useMove(p1Move, p2, showText);
+						p1.useMoveIndex(p1Move, p2, showText);
 					}
 				}
 				else if (p1.getStatus().equals(Status.PARALYSIS) && Math.random() < 0.25) {
@@ -265,7 +265,7 @@ public class GenVSim {
 							System.out.println(p1.getName() + " is no longer frozen!"); // TODO: correct text?
 						}
 						p1.setStatus(Status.OKAY);
-						p1.useMove(p1Move, p2, showText);
+						p1.useMoveIndex(p1Move, p2, showText);
 					}
 				} else {
 					// flinch
@@ -274,7 +274,7 @@ public class GenVSim {
 							System.out.println(p1.getName() + " flinched!");
 						}
 					} else {
-						p1.useMove(p1Move, p2, showText);
+						p1.useMoveIndex(p1Move, p2, showText);
 					}
 				}
 			}
@@ -602,7 +602,7 @@ public class GenVSim {
 		return (p1.getStatus().equals(Status.FAINT) || p2.getStatus().equals(Status.FAINT));
 	}
 	
-	public static int getCounter() {
+	public static int getCounterGenVSim() {
 	    return counter;
 	}
 }
