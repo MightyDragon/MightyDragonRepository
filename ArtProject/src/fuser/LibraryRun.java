@@ -1,6 +1,6 @@
 package fuser;
 
-import src.simulator.Client;
+import main.MainLibrary;
 
 
 /* 
@@ -8,14 +8,13 @@ import src.simulator.Client;
  * Credit: Used Java API to find out about this functionality
  */
 
-public class ClientRun implements Runnable {
+public class LibraryRun implements Runnable {
 	
 	public void run() {
-
-		//For running Pokemon
-		Client pokemonClient = new Client();
-		pokemonClient.mainFile();
 		
+		//For running Library
+		MainLibrary libMain = new MainLibrary();
+		libMain.mainLib();
 	}
 	
 }

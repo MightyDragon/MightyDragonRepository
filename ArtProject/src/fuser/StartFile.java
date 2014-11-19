@@ -60,8 +60,8 @@ public class StartFile {
 //		ArrayList<Object[]> methodList = getMethodNames(classList);
 //		int methodNum = methodList.size();
 //		JSONArray allJSONlinks = createJSONRealLinks(methodNum, methodList);
-//		ClientRun pkmnClient = new ClientRun();
-//		Thread t = new Thread(pkmnClient);
+//		LibraryRun libClient = new LibraryRun();
+//		Thread t = new Thread(libClient);
 //		t.start();
 		
 		// To run Library
@@ -79,7 +79,7 @@ public class StartFile {
 //		}
 //		JSONArray allJSONlinks = createJSONCallHeirarchy(methodLinkPairs, methodList);
 //		ArrayList<Object[]> objList = getLibObjectNumber();
-//		ClientRun libClient = new ClientRun();
+//		LibraryRun libClient = new LibraryRun();
 //		Thread t = new Thread(libClient);
 //		t.start();
 		
@@ -103,25 +103,16 @@ public class StartFile {
 		t.start();
 		
 		
-		// Demo for TAs to see our JSON objects for nodes. MUST COMMENT OUT LINE 74 AND 167. Its line 3 of the console
-//		ArrayList<Object[]> methodList = getMethodNames(classList);
-//		System.out.println(createJSONMethods(methodList));
-		
-		
 		// This gets the stack trace ~~~~~~~~~~~~~~~~~~~`
-	
-		/*
-		 * We didnt use the code in this link in the program but we used it to learn what was going on:
-		 * Credit: http://stackoverflow.com/questions/1149703/how-can-i-convert-a-stack-trace-to-a-string
-		 */
 		int j = 1;
 		while (t.isAlive()) {
-			//System.out.println("Current stack trace:");
 			
 			//credit: used Java API
 			StackTraceElement[] trace = t.getStackTrace();
 			ArrayList<String[]> methodPairs = new ArrayList<String[]>();
 			
+			//We didnt use the code in this link in the program but we used it to learn what was going on:
+			//Credit: http://stackoverflow.com/questions/1149703/how-can-i-convert-a-stack-trace-to-a-string
 			//gets stack size for creating pairs of methods (linked together)
 			int stackNumber = trace.length;
 			for(int i=0; i<stackNumber-2 ;i++) {
@@ -129,11 +120,8 @@ public class StartFile {
 				methodPairs.add(firstO);
 				}
 			
-			// goes to methods that make JSON objects
 			
-//			ArrayList<Object[]> methodList = getMethodNames(classList);
-//			createJSONMethods(methodList);
-//			createJSONLinks(methodPairs, methodList);
+			// goes to methods that make JSON objects
 			
 			JSONObject nodesAndLinks = new JSONObject();
 			nodesAndLinks.put("nodes", createJSONMethods(methodList, methodPairs));
@@ -466,6 +454,8 @@ public class StartFile {
 		int randomNum = rand.nextInt((max-min)+1)+min;
 		return randomNum;
 	}
+	
+	// Created for testing visualizer
 	public static JSONArray createJSONLinksStatic(int numMethods, ArrayList<Object[]> allMethods){
 		JSONObject allLinks = new JSONObject();
 		JSONArray listLinks = new JSONArray();
@@ -482,10 +472,9 @@ public class StartFile {
 			
 		}
 	//allLinks.put("links", listLinks);
-	
 	//Dynamically shows JSON objects as program is running of Links between methods (stack trace)
 	//System.out.println(allLinks);
 	return listLinks;
 }
 }
-
+//http://bl.ocks.org/mbostock/4062045
