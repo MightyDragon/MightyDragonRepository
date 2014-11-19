@@ -48,68 +48,95 @@ import java.io.InputStream;
 import java.io.StringWriter; 
 import java.io.PrintWriter;
 
+//We used these two links to create the visualizer:
+//  http://bl.ocks.org/mbostock/4062045
+//  http://bl.ocks.org/mbostock/4566102
+
 
 public class StartFile {
-
-	public static void main(String args[]){
-		System.out.println("And thus, we begin... ");
+	
+	 // Choose 0 for Pokemon, 1 for Library, and 2 for AnimalTesting. Default is pokemon if not valid number
+	static int runProgramNumber = 0;
+	
+	public static void main(String args[]){	
+		Thread t = new Thread();
+		ArrayList<Object[]> methodList = new ArrayList<Object[]>();
+		ArrayList<Object[]> objList;
+		JSONArray allJSONlinks = new JSONArray();
 		
-		// To run initial Animal Testing :) 
-//		DummyObjects dummy = new DummyObjects();
-//		ArrayList<Class> classList = dummy.getClasses();
-//		ArrayList<Object[]> methodList = getMethodNames(classList);
-//		int methodNum = methodList.size();
-//		JSONArray allJSONlinks = createJSONRealLinks(methodNum, methodList);
-//		LibraryRun libClient = new LibraryRun();
-//		Thread t = new Thread(libClient);
-//		t.start();
-		
-		// To run Library
-//		LibraryClassCollector objects = new LibraryClassCollector();
-//		ArrayList<Class> classList = objects.getClasses();
-//		ArrayList<Object[]> methodList = getMethodNames(classList);
-//		ArrayList<Method> methodArray = getMethodArray(methodList);
-//		ArrayList<ArrayList<Method>> methodLinkPairs = new ArrayList<ArrayList<Method>>();
-//		try {
-//			methodLinkPairs = getLinkPairsLibrary(methodArray);
-//		} catch (Exception e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//			System.out.println("ERROR -- problem generating call heirarchy");
-//		}
-//		JSONArray allJSONlinks = createJSONCallHeirarchy(methodLinkPairs, methodList);
-//		ArrayList<Object[]> objList = getLibObjectNumber();
-//		LibraryRun libClient = new LibraryRun();
-//		Thread t = new Thread(libClient);
-//		t.start();
-		
-		// To run Pokemon
-		PokemonClassCollector objects = new PokemonClassCollector();
-		ArrayList<Class> classList = objects.getClasses();
-		ArrayList<Object[]> methodList = getMethodNames(classList);
-		ArrayList<Method> methodArray = getMethodArray(methodList);
-		ArrayList<ArrayList<Method>> methodLinkPairs = new ArrayList<ArrayList<Method>>();
-		try {
-			methodLinkPairs = getLinkPairsPokemon(methodArray);
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-			System.out.println("ERROR -- problem generating call heirarchy");
+ 
+		if(runProgramNumber==1){	
+			// To run initial Animal Testing choose option 1
+			
+//			DummyObjects dummy = new DummyObjects();
+//			ArrayList<Class> classList = dummy.getClasses();
+//			ArrayList<Object[]> methodList = getMethodNames(classList);
+//			int methodNum = methodList.size();
+//			JSONArray allJSONlinks = createJSONRealLinks(methodNum, methodList);
+//			LibraryRun libClient = new LibraryRun();
+//			t = new Thread(libClient);
+//			t.start();
 		}
-		JSONArray allJSONlinks = createJSONCallHeirarchy(methodLinkPairs, methodList);
-		ArrayList<Object[]> objList = getPkmnObjectNumber();
-		ClientRun pkmnClient = new ClientRun();
-		Thread t = new Thread(pkmnClient);
-		t.start();
 		
+		else if(runProgramNumber==2){		
+			// To run Library choose option 2
+			LibraryClassCollector objects = new LibraryClassCollector();
+			ArrayList<Class> classList = objects.getClasses();
+			methodList = getMethodNames(classList);
+			ArrayList<Method> methodArray = getMethodArray(methodList);
+			ArrayList<ArrayList<Method>> methodLinkPairs = new ArrayList<ArrayList<Method>>();
+			try {
+				methodLinkPairs = getLinkPairsLibrary(methodArray);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+				System.out.println("ERROR -- problem generating call heirarchy");
+			}
+			allJSONlinks = createJSONCallHeirarchy(methodLinkPairs, methodList);
+			objList = getLibObjectNumber();
+			LibraryRun libClient = new LibraryRun();
+			t = new Thread(libClient);
+			t.start();
+			
+		} 
+		else{	
+			//To run Pokemon choose any other integer other than 1 or 2
+			PokemonClassCollector objects = new PokemonClassCollector();
+			ArrayList<Class> classList = objects.getClasses();
+			methodList = getMethodNames(classList);
+			ArrayList<Method> methodArray = getMethodArray(methodList);
+			ArrayList<ArrayList<Method>> methodLinkPairs = new ArrayList<ArrayList<Method>>();
+			try {
+				methodLinkPairs = getLinkPairsPokemon(methodArray);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+				System.out.println("ERROR -- problem generating call heirarchy");
+			}
+			allJSONlinks = createJSONCallHeirarchy(methodLinkPairs, methodList);
+			ClientRun pkmnClient = new ClientRun();
+			t = new Thread(pkmnClient);
+			t.start();
+		}
 		
-		// This gets the stack trace ~~~~~~~~~~~~~~~~~~~`
+		// This gets the stack trace`
 		int j = 1;
 		while (t.isAlive()) {
 			
 			//credit: used Java API
 			StackTraceElement[] trace = t.getStackTrace();
 			ArrayList<String[]> methodPairs = new ArrayList<String[]>();
+			
+			if (runProgramNumber==1){
+				
+			}
+			if (runProgramNumber==2){
+				objList = getLibObjectNumber();
+			}
+			else{
+				objList = getPkmnObjectNumber();
+			}
+			
 			
 			//We didnt use the code in this link in the program but we used it to learn what was going on:
 			//Credit: http://stackoverflow.com/questions/1149703/how-can-i-convert-a-stack-trace-to-a-string
@@ -120,9 +147,7 @@ public class StartFile {
 				methodPairs.add(firstO);
 				}
 			
-			
 			// goes to methods that make JSON objects
-			
 			JSONObject nodesAndLinks = new JSONObject();
 			nodesAndLinks.put("nodes", createJSONMethods(methodList, methodPairs));
 			nodesAndLinks.put("stacklinks", createJSONLinksStack(methodPairs, methodList));
@@ -131,20 +156,20 @@ public class StartFile {
 			nodesAndLinks.put("stacklinks",createJSONLinksStack(methodPairs, methodList));
 			System.out.println(nodesAndLinks);
 			
-			try {
-				 
+			try { 
 				FileWriter file = new FileWriter("war/json/miserables"+ j +".json");
 				j++;
 				file.write(nodesAndLinks.toJSONString());
 				file.flush();
 				file.close();
-		 
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
 	}
 	
+	
+	//---------------------------- GET METHODS AND CLASSES THROUGH REFLECTION METHODS----------------------------------
 	
 	// Gets Object[] where [0] is a Method and [1] is a Class. Outputs all methods in all classes.
 	public static ArrayList<Object[]> getMethodNames(ArrayList<Class> classes){
@@ -163,6 +188,8 @@ public class StartFile {
 		return pairs;
 	}
 	
+	
+	//Uses method/class/position array to get an arraylist of just methods
 	public static ArrayList<Method> getMethodArray(ArrayList<Object[]> methodClasses){
 		ArrayList<Method> methodList = new ArrayList<Method>();
 		for (Object[] o : methodClasses){
@@ -172,11 +199,17 @@ public class StartFile {
 		return methodList;
 	}
 	
+	
+	
+	// -----------------------------------------GET CALL HEIRARCHY METHODS --------------------------------------
+	
 	/*
 	 *  Gets all pairs of methods that are linked through a method call. 
 	 *  Have not implemented yet however we will use this as a resource:
 	 *  Credit: I asked this question on stack overflow http://stackoverflow.com/questions/26554990/how-to-get-all-possible-callers-of-a-method-in-java-like-call-heirarchy
 	 */
+	
+	//Java API was used for getting the link pairs
 	public static ArrayList<ArrayList<Method>> getLinkPairsPokemon(ArrayList<Method> methods) throws Exception{
 		ArrayList<ArrayList<Method>> links = new ArrayList<ArrayList<Method>>();
 
@@ -208,6 +241,7 @@ public class StartFile {
 		return links;
 	}
 	
+	//Java API was used for getting the link pairs
 	public static ArrayList<ArrayList<Method>> getLinkPairsLibrary(ArrayList<Method> methods) throws Exception{
 		ArrayList<ArrayList<Method>> links = new ArrayList<ArrayList<Method>>();
 		
@@ -237,9 +271,14 @@ public class StartFile {
 		return links;
 	}
 	
+	
+	// -----------------------------------------GET OBJECT COUNT SECTION --------------------------------
+	
+	//Used this link to figure out how to get object count
+	// http://stackoverflow.com/questions/20159104/count-number-of-existing-objects
+	
 	/* Gets an Object[] of class name and object count in that class for pokemon
 	 */
-	
 	public static ArrayList<Object[]> getPkmnObjectNumber(){
 		ArrayList<Object[]> pairs = new ArrayList<Object[]>();
 		Object[] p1 = {"Ability", Ability.getCounterAbility()};
@@ -260,12 +299,11 @@ public class StartFile {
 		pairs.add(p8);
 		
 		return pairs;
-
 	}
+	
 	
 	/* Gets an Object[] of class name and object count in that class for Library
 	 */
-	
 	public static ArrayList<Object[]> getLibObjectNumber(){
 		
 		ArrayList<Object[]> pairs = new ArrayList<Object[]>();
@@ -303,28 +341,11 @@ public class StartFile {
 		pairs.add(p16);
 		
 		return pairs;
-
 	}
 
-	// Creates JSON object to input int the visualizer
-		public static JSONArray createJSONObjects(ArrayList<Object[]> objectList){
-			JSONArray listObjects = new JSONArray();
-
-			int classNum = 0;
-			for (Object[] o : objectList) {
-				int classObjectNum = (int) o[1];
-				for (int i=0; i<classObjectNum; i++){
-					JSONObject obj = new JSONObject();
-					obj.put("x", (new Random()).nextInt(1180)+10);
-					obj.put("y", (new Random()).nextInt(680)+10);
-					obj.put("group", classNum);
-					listObjects.add(obj);
-				}
-				classNum++;
-			}		
-			return listObjects;
-		}
 	
+	
+	// ------------------------------------ CREATE JSON SECTION ------------------------------------
 	
 	/*
 	 * JSON creators (next two methods). Used my own brilliant mind for algorithms and also tutorial to learn JSON constructors 
@@ -349,7 +370,7 @@ public class StartFile {
 		//boolean highlightedAlready = false;
 		for (Object[] m : classList){
 			JSONObject meth = new JSONObject();
-
+			
 			Method methodz = (Method)m[0];
 			Class classz = (Class)m[1];
 			meth.put("name", methodz.getName());
@@ -370,7 +391,6 @@ public class StartFile {
 		}
 		//allMethods.put("nodes", listMethods);
 		//System.out.println(allMethods);
-		
 		return listMethods;
 	}
 	
@@ -448,12 +468,38 @@ public class StartFile {
 		//System.out.println(allLinks);
 		return listLinks;
 	}
+	
+	
+	// Creates JSON object to input int the visualizer
+		public static JSONArray createJSONObjects(ArrayList<Object[]> objectList){
+			JSONArray listObjects = new JSONArray();
+
+			int classNum = 0;
+			for (Object[] o : objectList) {
+				int classObjectNum = (int) o[1];
+				for (int i=0; i<classObjectNum; i++){
+					JSONObject obj = new JSONObject();
+					obj.put("x", (new Random()).nextInt(1180)+10);
+					obj.put("y", (new Random()).nextInt(680)+10);
+					obj.put("group", classNum);
+					listObjects.add(obj);
+				}
+				classNum++;
+			}		
+			return listObjects;
+		}
+		
+		
+		
+	// ------------------------MISCELLANEOUS METHODS AND TESTS SECTION --------------------------
+		
 	// Somewhere on stack overflow on how to make random numbers
 	public static int rand(int min, int max){
 		Random rand = new Random();
 		int randomNum = rand.nextInt((max-min)+1)+min;
 		return randomNum;
 	}
+	
 	
 	// Created for testing visualizer
 	public static JSONArray createJSONLinksStatic(int numMethods, ArrayList<Object[]> allMethods){
@@ -477,4 +523,4 @@ public class StartFile {
 	return listLinks;
 }
 }
-//http://bl.ocks.org/mbostock/4062045
+
