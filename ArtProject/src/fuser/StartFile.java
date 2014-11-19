@@ -56,7 +56,7 @@ import java.io.PrintWriter;
 public class StartFile {
 	
 	 // Choose 0 for Pokemon, 1 for Library, and 2 for AnimalTesting. Default is pokemon if not valid number
-	static int runProgramNumber = 1;
+	static int runProgramNumber = 0;
 	
 	public static void main(String args[]){	
 		Thread t = new Thread();
@@ -475,17 +475,66 @@ public class StartFile {
 			JSONArray listObjects = new JSONArray();
 
 			int classNum = 0;
+			
+			// uncomment the desired display style
+			
+			// OLD
+//			for (Object[] o : objectList) {
+//				int classObjectNum = (int) o[1];
+//				for (int i=0; i<classObjectNum; i++){
+//					JSONObject obj = new JSONObject();
+//					obj.put("x", (new Random()).nextInt(1180)+10);
+//					obj.put("y", (new Random()).nextInt(680)+10);
+//					obj.put("group", classNum);
+//					listObjects.add(obj);
+//				}
+//				classNum++;
+//			}
+			
+			// frame
+//			int x;
+//			int y;
+//			for (Object[] o : objectList) {
+//				int classObjectNum = (int) o[1];
+//				for (int i=0; i<classObjectNum; i++){
+//					// frame of 150 on two sides, minus 10 on four edges = 260
+//					x = (new Random()).nextInt(260) + 10; // add 10 b/c we have to anyway
+//					if (x >= 140) {x = x + 920;} // width of 900 plus 2*10 frame
+//					y = (new Random()).nextInt(260) + 10; // add 10 b/c we have to anyway
+//					if (x >= 140) {x = x + 420;} // height of 400 plus 2*10 frame
+//					JSONObject obj = new JSONObject();
+//					obj.put("x", x);
+//					obj.put("y", y);
+//					obj.put("group", classNum);
+//					listObjects.add(obj);
+//				}
+//				classNum++;
+//			}
+			
+			
+			// lined up along top of screen, grouped by class (new line for each class)
+			int rowNum = 0;
+			int colNum = 0;
 			for (Object[] o : objectList) {
+				rowNum = 0;
+				colNum = 0;
 				int classObjectNum = (int) o[1];
 				for (int i=0; i<classObjectNum; i++){
+					if (10 + colNum*6 >= 1100) {
+						colNum = 0;
+						rowNum++;
+					}
 					JSONObject obj = new JSONObject();
-					obj.put("x", (new Random()).nextInt(1180)+10);
-					obj.put("y", (new Random()).nextInt(680)+10);
+					obj.put("x", 10 + colNum*6); // gap of 2 in between columns (nodes have r=2)
+					obj.put("y", 10 + rowNum*7); // gap of 3 in between rows (nodes have r=2)
 					obj.put("group", classNum);
 					listObjects.add(obj);
+					colNum++;
 				}
 				classNum++;
-			}		
+				rowNum++;
+			}
+			
 			return listObjects;
 		}
 		
