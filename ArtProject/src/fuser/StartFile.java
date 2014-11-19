@@ -201,7 +201,7 @@ public class StartFile {
 	
 	
 	
-	// ------------------------------------------------Call Heirarchy --------------------------------------
+	// -----------------------------------------GET CALL HEIRARCHY METHODS --------------------------------------
 	
 	/*
 	 *  Gets all pairs of methods that are linked through a method call. 
