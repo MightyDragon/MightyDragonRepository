@@ -56,7 +56,7 @@ import java.io.PrintWriter;
 public class StartFile {
 	
 	 // Choose 0 for Pokemon, 1 for Library, and 2 for AnimalTesting. Default is pokemon if not valid number
-	static int runProgramNumber = 0;
+	static int runProgramNumber = 1;
 	
 	public static void main(String args[]){	
 		Thread t = new Thread();
@@ -65,7 +65,7 @@ public class StartFile {
 		JSONArray allJSONlinks = new JSONArray();
 		
  
-		if(runProgramNumber==1){	
+		if(runProgramNumber==2){	
 			// To run initial Animal Testing choose option 1
 			
 //			DummyObjects dummy = new DummyObjects();
@@ -78,7 +78,7 @@ public class StartFile {
 //			t.start();
 		}
 		
-		else if(runProgramNumber==2){		
+		else if(runProgramNumber==1){		
 			// To run Library choose option 2
 			LibraryClassCollector objects = new LibraryClassCollector();
 			ArrayList<Class> classList = objects.getClasses();
