@@ -501,7 +501,7 @@ public class StartFile {
 //					x = (new Random()).nextInt(260) + 10; // add 10 b/c we have to anyway
 //					if (x >= 140) {x = x + 920;} // width of 900 plus 2*10 frame
 //					y = (new Random()).nextInt(260) + 10; // add 10 b/c we have to anyway
-//					if (x >= 140) {x = x + 420;} // height of 400 plus 2*10 frame
+//					if (y >= 140) {y = y + 420;} // height of 400 plus 2*10 frame
 //					JSONObject obj = new JSONObject();
 //					obj.put("x", x);
 //					obj.put("y", y);
