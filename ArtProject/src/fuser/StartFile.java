@@ -66,7 +66,7 @@ public class StartFile {
 		
  
 		if(runProgramNumber==2){	
-			// To run initial Animal Testing choose option 1
+			// To run initial Animal Testing choose option 2
 			
 //			DummyObjects dummy = new DummyObjects();
 //			ArrayList<Class> classList = dummy.getClasses();
@@ -79,7 +79,7 @@ public class StartFile {
 		}
 		
 		else if(runProgramNumber==1){		
-			// To run Library choose option 2
+			// To run Library choose option 1
 			LibraryClassCollector objects = new LibraryClassCollector();
 			ArrayList<Class> classList = objects.getClasses();
 			methodList = getMethodNames(classList);
@@ -127,10 +127,10 @@ public class StartFile {
 			StackTraceElement[] trace = t.getStackTrace();
 			ArrayList<String[]> methodPairs = new ArrayList<String[]>();
 			
-			if (runProgramNumber==1){
+			if (runProgramNumber==2){
 				
 			}
-			if (runProgramNumber==2){
+			if (runProgramNumber==1){
 				objList = getLibObjectNumber();
 			}
 			else{
@@ -479,17 +479,17 @@ public class StartFile {
 			// uncomment the desired display style
 			
 			// OLD
-//			for (Object[] o : objectList) {
-//				int classObjectNum = (int) o[1];
-//				for (int i=0; i<classObjectNum; i++){
-//					JSONObject obj = new JSONObject();
-//					obj.put("x", (new Random()).nextInt(1180)+10);
-//					obj.put("y", (new Random()).nextInt(680)+10);
-//					obj.put("group", classNum);
-//					listObjects.add(obj);
-//				}
-//				classNum++;
-//			}
+			for (Object[] o : objectList) {
+				int classObjectNum = (int) o[1];
+				for (int i=0; i<classObjectNum; i++){
+					JSONObject obj = new JSONObject();
+					obj.put("x", (new Random()).nextInt(1180)+10);
+					obj.put("y", (new Random()).nextInt(680)+10);
+					obj.put("group", classNum);
+					listObjects.add(obj);
+				}
+				classNum++;
+			}
 			
 			// frame
 //			int x;
@@ -513,27 +513,27 @@ public class StartFile {
 			
 			
 			// lined up along top of screen, grouped by class (new line for each class)
-			int rowNum = 0;
-			int colNum = 0;
-			for (Object[] o : objectList) {
-				rowNum = 0;
-				colNum = 0;
-				int classObjectNum = (int) o[1];
-				for (int i=0; i<classObjectNum; i++){
-					if (10 + colNum*6 >= 1100) {
-						colNum = 0;
-						rowNum++;
-					}
-					JSONObject obj = new JSONObject();
-					obj.put("x", 10 + colNum*6); // gap of 2 in between columns (nodes have r=2)
-					obj.put("y", 10 + rowNum*7); // gap of 3 in between rows (nodes have r=2)
-					obj.put("group", classNum);
-					listObjects.add(obj);
-					colNum++;
-				}
-				classNum++;
-				rowNum++;
-			}
+//			int rowNum = 0;
+//			int colNum = 0;
+//			for (Object[] o : objectList) {
+//				rowNum = 0;
+//				colNum = 0;
+//				int classObjectNum = (int) o[1];
+//				for (int i=0; i<classObjectNum; i++){
+//					if (10 + colNum*6 >= 1100) {
+//						colNum = 0;
+//						rowNum++;
+//					}
+//					JSONObject obj = new JSONObject();
+//					obj.put("x", 10 + colNum*6); // gap of 2 in between columns (nodes have r=2)
+//					obj.put("y", 10 + rowNum*7); // gap of 3 in between rows (nodes have r=2)
+//					obj.put("group", classNum);
+//					listObjects.add(obj);
+//					colNum++;
+//				}
+//				classNum++;
+//				rowNum++;
+//			}
 			
 			return listObjects;
 		}
